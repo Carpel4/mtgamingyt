@@ -4,31 +4,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta name="theme-color" content="#071426">
-<meta name="description" content="MTgaming — Minecraft, PvP, BedWars, highlights and gaming content.">
+<meta name="theme-color" content="#06152b">
 
 <title>MTgaming | Enter the Grid</title>
 
 <style>
-
-/* =========================================================
-   MTGAMING // CYBER GRID
-========================================================= */
-
 :root{
   --cyan:#00e5ff;
   --blue:#1677ff;
-  --purple:#8b5cff;
   --pink:#ff2bd6;
   --green:#00ff9d;
-
-  --bg:#02040b;
   --text:#effcff;
-  --muted:#8da6b8;
-
-  --panel:rgba(7,18,35,.72);
-  --border:rgba(0,229,255,.2);
+  --muted:#91a9ba;
 }
 
 *{
@@ -39,88 +26,66 @@
 
 html{
   scroll-behavior:smooth;
-  scroll-padding-top:80px;
 }
 
 body{
   min-height:100vh;
-
   color:var(--text);
-
-  background:#02040b;
-
-  font-family:
-    "Segoe UI",
-    Arial,
-    sans-serif;
-
+  background:#02050c;
+  font-family:Segoe UI,Arial,sans-serif;
   overflow-x:hidden;
 }
 
-/* =========================================================
-   MAIN BACKGROUND
-========================================================= */
+/* =====================================================
+   REAL BACKGROUND
+===================================================== */
 
-body::before{
-  content:"";
-
+.background{
   position:fixed;
   inset:0;
-
-  z-index:-5;
+  z-index:0;
+  overflow:hidden;
+  pointer-events:none;
 
   background:
-
     radial-gradient(
       circle at 50% 15%,
-      rgba(0,229,255,.32),
+      rgba(0,229,255,.35),
       transparent 35%
     ),
-
     radial-gradient(
-      circle at 15% 65%,
-      rgba(22,119,255,.20),
+      circle at 10% 60%,
+      rgba(22,119,255,.28),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 90% 65%,
+      rgba(255,43,214,.20),
       transparent 30%
     ),
-
-    radial-gradient(
-      circle at 85% 65%,
-      rgba(255,43,214,.18),
-      transparent 30%
-    ),
-
     linear-gradient(
       180deg,
-      #071426 0%,
-      #09213b 45%,
-      #030914 100%
+      #071a32 0%,
+      #092442 45%,
+      #030a16 100%
     );
 }
 
-/* =========================================================
-   CYBER GRID
-========================================================= */
+/* GRID */
 
-body::after{
+.background::before{
   content:"";
-
-  position:fixed;
+  position:absolute;
   inset:0;
 
-  z-index:-3;
-
-  pointer-events:none;
-
   background-image:
-
     linear-gradient(
-      rgba(0,229,255,.10) 1px,
+      rgba(0,229,255,.11) 1px,
       transparent 1px
     ),
-
     linear-gradient(
       90deg,
-      rgba(0,229,255,.10) 1px,
+      rgba(0,229,255,.11) 1px,
       transparent 1px
     );
 
@@ -129,71 +94,147 @@ body::after{
   mask-image:
     linear-gradient(
       to bottom,
-      black 0%,
-      black 75%,
-      transparent 100%
+      black,
+      black 70%,
+      transparent
     );
 
   animation:gridMove 12s linear infinite;
 }
 
 @keyframes gridMove{
-
   to{
-    background-position:
-      0 50px,
-      50px 0;
+    background-position:0 50px,50px 0;
   }
-
 }
 
-/* =========================================================
-   SCANLINES
-========================================================= */
+/* HORIZON GLOW */
 
-.scanlines{
-  position:fixed;
-  inset:0;
+.horizon{
+  position:absolute;
 
-  z-index:50;
+  left:0;
+  right:0;
+  bottom:20%;
 
-  pointer-events:none;
+  height:3px;
 
-  opacity:.025;
+  background:var(--cyan);
 
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0px,
-      transparent 3px,
-      rgba(255,255,255,.8) 4px
-    );
+  box-shadow:
+    0 0 10px var(--cyan),
+    0 0 30px var(--cyan),
+    0 0 80px rgba(0,229,255,.8);
+
+  opacity:.7;
 }
 
-/* =========================================================
-   PARTICLES
-========================================================= */
+/* PARTICLES */
 
 #particles{
-  position:fixed;
-
+  position:absolute;
   inset:0;
 
   width:100%;
   height:100%;
-
-  z-index:-2;
-
-  pointer-events:none;
 }
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
+/* =====================================================
+   CITY
+===================================================== */
+
+.city{
+  position:absolute;
+
+  bottom:0;
+  left:0;
+  right:0;
+
+  height:34%;
+
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+
+  gap:6px;
+
+  opacity:.95;
+}
+
+.building{
+  position:relative;
+
+  width:clamp(30px,5vw,75px);
+
+  background:
+    linear-gradient(
+      180deg,
+      #12395d,
+      #071728 55%,
+      #02050b
+    );
+
+  border:
+    1px solid rgba(0,229,255,.5);
+
+  box-shadow:
+    0 0 20px rgba(0,229,255,.18),
+    inset 0 0 25px rgba(0,229,255,.08);
+}
+
+.building::after{
+  content:"";
+
+  position:absolute;
+  inset:12px 7px;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0,229,255,.95) 0 3px,
+      transparent 3px 15px
+    );
+
+  opacity:.7;
+}
+
+.building::before{
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+  top:-22px;
+
+  width:2px;
+  height:22px;
+
+  background:var(--cyan);
+
+  box-shadow:
+    0 0 10px var(--cyan),
+    0 0 20px var(--cyan);
+}
+
+.building:nth-child(1){height:45%}
+.building:nth-child(2){height:65%}
+.building:nth-child(3){height:52%}
+.building:nth-child(4){height:88%}
+.building:nth-child(5){height:62%}
+.building:nth-child(6){height:76%}
+.building:nth-child(7){height:47%}
+.building:nth-child(8){height:93%}
+.building:nth-child(9){height:58%}
+.building:nth-child(10){height:72%}
+.building:nth-child(11){height:50%}
+.building:nth-child(12){height:82%}
+
+/* =====================================================
+   NAV
+===================================================== */
 
 nav{
   position:fixed;
-
   top:0;
   left:0;
   right:0;
@@ -201,26 +242,20 @@ nav{
   z-index:100;
 
   display:flex;
-
   align-items:center;
   justify-content:space-between;
 
   padding:15px 5%;
 
-  background:
-    rgba(2,8,18,.68);
-
+  background:rgba(2,7,16,.72);
   backdrop-filter:blur(18px);
 
-  border-bottom:
-    1px solid rgba(0,229,255,.15);
+  border-bottom:1px solid rgba(0,229,255,.18);
 }
 
 .logo{
-  font-size:1.2rem;
-
   font-weight:900;
-
+  font-size:1.2rem;
   letter-spacing:2px;
 }
 
@@ -229,86 +264,47 @@ nav{
 
   text-shadow:
     0 0 8px var(--cyan),
-    0 0 20px rgba(0,229,255,.55);
+    0 0 20px var(--cyan);
 }
 
 .navlinks{
   display:flex;
-
   gap:26px;
 }
 
 .navlinks a{
-  position:relative;
-
-  color:#a8bfce;
-
+  color:#a9bfce;
   text-decoration:none;
 
   font-size:.78rem;
-
   font-weight:700;
-
   letter-spacing:1.5px;
 
-  transition:.25s;
+  transition:.2s;
 }
 
 .navlinks a:hover{
   color:var(--cyan);
 }
 
-.navlinks a::after{
-  content:"";
-
-  position:absolute;
-
-  left:0;
-  bottom:-7px;
-
-  width:0;
-  height:2px;
-
-  background:var(--cyan);
-
-  box-shadow:
-    0 0 8px var(--cyan);
-
-  transition:.25s;
-}
-
-.navlinks a:hover::after{
-  width:100%;
-}
-
-.nav-right{
+.navright{
   display:flex;
-
   align-items:center;
-
   gap:12px;
 }
 
-.navstatus{
-  display:flex;
-
-  align-items:center;
-
+.status{
   padding:7px 11px;
 
-  border:
-    1px solid rgba(0,229,255,.3);
-
+  border:1px solid rgba(0,229,255,.3);
   border-radius:999px;
 
   color:#7fffe9;
 
   font-size:.68rem;
-
   letter-spacing:1px;
 
-  background:
-    rgba(0,229,255,.05);
+  background:rgba(0,229,255,.05);
 }
 
 .dot{
@@ -317,87 +313,46 @@ nav{
   width:7px;
   height:7px;
 
-  margin-right:7px;
+  margin-right:6px;
 
   border-radius:50%;
 
   background:var(--green);
 
-  box-shadow:
-    0 0 10px var(--green);
-
-  animation:pulse 1.8s infinite;
+  box-shadow:0 0 10px var(--green);
 }
 
-@keyframes pulse{
-
-  50%{
-    opacity:.4;
-    transform:scale(.7);
-  }
-
-}
-
-.navburger{
+.menu{
   display:none;
 
   width:40px;
   height:36px;
 
-  border:
-    1px solid rgba(0,229,255,.3);
-
+  border:1px solid rgba(0,229,255,.35);
   border-radius:7px;
 
-  background:
-    rgba(0,229,255,.05);
+  background:rgba(0,229,255,.05);
 
   cursor:pointer;
-
-  flex-direction:column;
-
-  justify-content:center;
-
-  align-items:center;
-
-  gap:5px;
 }
 
-.navburger span{
-  width:19px;
+.menu span{
+  display:block;
+
+  width:20px;
   height:2px;
 
+  margin:4px auto;
+
   background:var(--cyan);
-
-  box-shadow:
-    0 0 7px var(--cyan);
-
-  transition:.25s;
 }
 
-.navburger.open span:nth-child(1){
-  transform:
-    translateY(7px)
-    rotate(45deg);
-}
-
-.navburger.open span:nth-child(2){
-  opacity:0;
-}
-
-.navburger.open span:nth-child(3){
-  transform:
-    translateY(-7px)
-    rotate(-45deg);
-}
-
-.navdrop{
+.mobile-menu{
   display:none;
 
   position:fixed;
 
   top:67px;
-
   left:0;
   right:0;
 
@@ -405,64 +360,53 @@ nav{
 
   padding:10px 5% 18px;
 
-  background:
-    rgba(2,8,18,.97);
+  background:rgba(2,7,16,.97);
 
-  backdrop-filter:blur(18px);
-
-  border-bottom:
-    1px solid rgba(0,229,255,.2);
+  border-bottom:1px solid rgba(0,229,255,.2);
 }
 
-.navdrop.open{
+.mobile-menu.open{
   display:flex;
-
   flex-direction:column;
 }
 
-.navdrop a{
-  padding:14px 5px;
+.mobile-menu a{
+  padding:14px 4px;
 
-  color:#cfe6f0;
+  color:#d5edf5;
 
   text-decoration:none;
 
-  font-size:.85rem;
-
-  letter-spacing:1px;
-
-  border-bottom:
-    1px solid rgba(255,255,255,.06);
+  border-bottom:1px solid rgba(255,255,255,.06);
 }
 
-/* =========================================================
-   HERO
-========================================================= */
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content{
+  position:relative;
+  z-index:2;
+}
 
 .hero{
   min-height:100vh;
 
   display:grid;
-
   place-items:center;
 
-  position:relative;
-
-  padding:
-    120px 20px 90px;
-
   text-align:center;
+
+  padding:120px 20px 90px;
 }
 
-.hero-content{
-  max-width:1000px;
+.hero-inner{
+  max-width:950px;
 
-  animation:
-    heroIn 1s ease both;
+  animation:heroIn 1s ease;
 }
 
 @keyframes heroIn{
-
   from{
     opacity:0;
     transform:translateY(25px);
@@ -472,96 +416,66 @@ nav{
     opacity:1;
     transform:none;
   }
-
 }
 
-.scan{
-  display:inline-flex;
+.system{
+  display:inline-block;
 
-  align-items:center;
+  padding:9px 14px;
 
-  gap:9px;
-
-  padding:
-    9px 14px;
-
-  border:
-    1px solid rgba(0,229,255,.35);
-
+  border:1px solid rgba(0,229,255,.4);
   border-radius:6px;
 
-  color:#8be8f7;
+  color:#8be9f7;
 
   font-size:.7rem;
-
   letter-spacing:2px;
 
-  background:
-    rgba(0,229,255,.06);
-
-  box-shadow:
-    0 0 30px rgba(0,229,255,.08);
+  background:rgba(0,229,255,.06);
 }
 
-.scan::before{
-  content:"●";
+.system::before{
+  content:"● ";
 
   color:var(--green);
-
-  text-shadow:
-    0 0 8px var(--green);
+  text-shadow:0 0 8px var(--green);
 }
 
 h1{
-  margin:
-    27px 0 16px;
+  margin:28px 0 18px;
 
-  font-size:
-    clamp(4rem,12vw,10rem);
+  font-size:clamp(4rem,12vw,10rem);
 
-  line-height:.78;
+  line-height:.8;
 
-  letter-spacing:7px;
+  letter-spacing:6px;
 
   font-weight:1000;
 
+  color:#fff;
+
   text-transform:uppercase;
 
-  color:#f7fdff;
-
   text-shadow:
-
-    0 0 8px #fff,
-
-    0 0 25px
-      rgba(0,229,255,.9),
-
-    0 0 70px
-      rgba(0,229,255,.3),
-
-    6px 5px 0
-      rgba(255,43,214,.25);
+    0 0 8px white,
+    0 0 25px var(--cyan),
+    0 0 70px rgba(0,229,255,.35),
+    6px 5px 0 rgba(255,43,214,.2);
 }
 
 .tagline{
-  max-width:720px;
-
-  margin:auto;
-
-  color:#b0c7d5;
+  color:#b3c9d6;
 
   font-size:1rem;
 
-  line-height:1.7;
-
   letter-spacing:1px;
+
+  line-height:1.7;
 }
 
-.hero-buttons{
+.buttons{
   display:flex;
-
   justify-content:center;
-
   flex-wrap:wrap;
 
   gap:12px;
@@ -573,25 +487,19 @@ h1{
   display:inline-flex;
 
   align-items:center;
-
   justify-content:center;
 
-  gap:8px;
+  min-width:175px;
 
-  min-width:170px;
-
-  padding:
-    14px 23px;
+  padding:14px 22px;
 
   border-radius:8px;
 
-  font-size:.82rem;
-
-  font-weight:900;
-
-  letter-spacing:1px;
-
   text-decoration:none;
+
+  font-size:.8rem;
+  font-weight:900;
+  letter-spacing:1px;
 
   transition:.25s;
 }
@@ -607,27 +515,22 @@ h1{
     );
 
   box-shadow:
-    0 0 28px
-    rgba(0,229,255,.35);
+    0 0 28px rgba(0,229,255,.35);
 }
 
 .secondary{
-  color:#e1faff;
+  color:#e5fbff;
 
-  border:
-    1px solid rgba(0,229,255,.4);
+  border:1px solid rgba(0,229,255,.4);
 
-  background:
-    rgba(255,255,255,.04);
+  background:rgba(255,255,255,.04);
 }
 
 .btn:hover{
-  transform:
-    translateY(-4px);
+  transform:translateY(-4px);
 
   box-shadow:
-    0 12px 38px
-    rgba(0,229,255,.28);
+    0 12px 35px rgba(0,229,255,.3);
 }
 
 .scroll{
@@ -635,149 +538,27 @@ h1{
 
   bottom:25px;
 
-  color:#6c8a9d;
+  color:#7390a2;
 
-  font-size:.67rem;
+  font-size:.65rem;
 
   letter-spacing:3px;
-
-  animation:
-    scrollPulse 2s infinite;
 }
 
-@keyframes scrollPulse{
-
-  50%{
-    opacity:.35;
-    transform:translateY(5px);
-  }
-
-}
-
-/* =========================================================
-   CYBER CITY
-========================================================= */
-
-.city{
-  position:fixed;
-
-  bottom:0;
-
-  left:0;
-  right:0;
-
-  height:35vh;
-
-  z-index:-1;
-
-  display:flex;
-
-  align-items:flex-end;
-
-  justify-content:center;
-
-  gap:6px;
-
-  opacity:.95;
-
-  pointer-events:none;
-
-  filter:
-    drop-shadow(
-      0 0 12px
-      rgba(0,229,255,.18)
-    );
-}
-
-.b{
-  width:
-    clamp(30px,5vw,72px);
-
-  position:relative;
-
-  background:
-    linear-gradient(
-      180deg,
-      #123657 0%,
-      #071525 55%,
-      #02050b 100%
-    );
-
-  border:
-    1px solid rgba(0,229,255,.45);
-
-  box-shadow:
-
-    0 0 18px
-      rgba(0,229,255,.16),
-
-    inset 0 0 20px
-      rgba(0,229,255,.08);
-}
-
-.b::after{
-  content:"";
-
-  position:absolute;
-
-  inset:12px 7px;
-
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      rgba(0,229,255,.95) 0 3px,
-      transparent 3px 15px
-    );
-
-  opacity:.75;
-}
-
-.b::before{
-  content:"";
-
-  position:absolute;
-
-  left:50%;
-
-  top:-20px;
-
-  width:2px;
-
-  height:20px;
-
-  background:#00e5ff;
-
-  box-shadow:
-    0 0 8px #00e5ff,
-    0 0 18px #00e5ff;
-}
-
-.b:nth-child(1){height:45%}
-.b:nth-child(2){height:68%}
-.b:nth-child(3){height:53%}
-.b:nth-child(4){height:87%}
-.b:nth-child(5){height:62%}
-.b:nth-child(6){height:78%}
-.b:nth-child(7){height:48%}
-.b:nth-child(8){height:93%}
-.b:nth-child(9){height:58%}
-.b:nth-child(10){height:73%}
-
-/* =========================================================
-   CONTENT
-========================================================= */
+/* =====================================================
+   SECTIONS
+===================================================== */
 
 .wrap{
   width:min(1100px,90%);
 
   margin:auto;
 
-  padding:
-    80px 0 110px;
+  padding:80px 0 110px;
 }
 
 .section{
-  margin-bottom:90px;
+  margin-bottom:95px;
 }
 
 .section-title{
@@ -797,115 +578,77 @@ h1{
 }
 
 .section-title h2{
-  margin:
-    9px 0 10px;
+  margin:9px 0;
 
-  font-size:
-    clamp(1.8rem,4vw,2.5rem);
+  font-size:clamp(1.8rem,4vw,2.5rem);
 }
 
 .section-title p{
   color:var(--muted);
-
-  font-size:.9rem;
 }
 
-/* =========================================================
-   GLASS CARDS
-========================================================= */
+/* =====================================================
+   CARDS
+===================================================== */
 
 .card{
   position:relative;
 
   padding:27px;
 
-  overflow:hidden;
-
-  border:
-    1px solid var(--border);
-
   border-radius:15px;
+
+  border:1px solid rgba(0,229,255,.2);
 
   background:
     linear-gradient(
       145deg,
-      rgba(10,27,48,.78),
-      rgba(3,10,21,.72)
+      rgba(10,30,52,.78),
+      rgba(3,10,20,.78)
     );
 
   backdrop-filter:blur(12px);
 
   box-shadow:
-    0 20px 60px
-    rgba(0,0,0,.35),
-
-    inset 0 0 35px
-    rgba(0,229,255,.025);
+    0 20px 55px rgba(0,0,0,.35);
 
   transition:.3s;
-}
 
-.card::before{
-  content:"";
-
-  position:absolute;
-
-  top:0;
-
-  left:-100%;
-
-  width:70%;
-
-  height:1px;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      var(--cyan),
-      transparent
-    );
-
-  transition:.6s;
-}
-
-.card:hover::before{
-  left:120%;
+  overflow:hidden;
 }
 
 .card:hover{
-  transform:
-    translateY(-7px);
+  transform:translateY(-7px);
 
-  border-color:
-    rgba(0,229,255,.45);
+  border-color:rgba(0,229,255,.5);
 
   box-shadow:
-
-    0 20px 55px
-      rgba(0,0,0,.4),
-
-    0 0 28px
-      rgba(0,229,255,.08);
+    0 20px 55px rgba(0,0,0,.4),
+    0 0 25px rgba(0,229,255,.1);
 }
 
-.about-card{
+.card h3{
+  margin:10px 0;
+
+  letter-spacing:1px;
+}
+
+.card p{
+  color:var(--muted);
+
+  line-height:1.7;
+
+  font-size:.9rem;
+}
+
+.about{
   text-align:center;
 }
 
-.about-card p{
+.about > p{
   max-width:800px;
-
   margin:auto;
-
-  color:var(--muted);
-
-  line-height:1.8;
 }
-
-/* =========================================================
-   GRID
-========================================================= */
 
 .grid{
   display:grid;
@@ -917,31 +660,8 @@ h1{
 }
 
 .icon{
-  font-size:2rem;
-
-  margin-bottom:8px;
+  font-size:2.2rem;
 }
-
-.card h3{
-  margin:
-    10px 0 9px;
-
-  font-size:1rem;
-
-  letter-spacing:1px;
-}
-
-.card p{
-  color:var(--muted);
-
-  line-height:1.65;
-
-  font-size:.9rem;
-}
-
-/* =========================================================
-   STATS
-========================================================= */
 
 .stats{
   display:grid;
@@ -955,46 +675,36 @@ h1{
 }
 
 .stat{
-  text-align:center;
+  padding:18px;
 
-  padding:20px;
+  border-radius:10px;
 
-  border:
-    1px solid rgba(0,229,255,.14);
+  border:1px solid rgba(0,229,255,.14);
 
-  border-radius:12px;
-
-  background:
-    rgba(0,229,255,.035);
+  background:rgba(0,229,255,.04);
 }
 
-.stat-number{
+.stat strong{
   display:block;
 
   color:var(--cyan);
 
-  font-size:1.6rem;
-
-  font-weight:900;
-
-  text-shadow:
-    0 0 14px
-    rgba(0,229,255,.45);
+  font-size:1.4rem;
 }
 
-.stat-label{
-  color:#718b9d;
+.stat span{
+  color:#718c9e;
 
-  font-size:.68rem;
+  font-size:.65rem;
 
   letter-spacing:2px;
 }
 
-/* =========================================================
+/* =====================================================
    CHANNEL
-========================================================= */
+===================================================== */
 
-.video-panel{
+.channel{
   display:grid;
 
   grid-template-columns:
@@ -1003,91 +713,36 @@ h1{
   gap:20px;
 }
 
-.video-box{
+.video{
   min-height:280px;
 
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  position:relative;
-
-  overflow:hidden;
-
-  border:
-    1px solid rgba(0,229,255,.25);
+  display:grid;
+  place-items:center;
 
   border-radius:15px;
 
-  background:
+  border:1px solid rgba(0,229,255,.3);
 
+  background:
     radial-gradient(
-      circle at center,
-      rgba(0,229,255,.2),
+      circle,
+      rgba(0,229,255,.22),
       transparent 55%
     ),
-
-    linear-gradient(
-      135deg,
-      #071b31,
-      #030914
-    );
+    #061426;
 
   box-shadow:
-    inset 0 0 50px
-    rgba(0,229,255,.08);
-}
-
-.video-box::before{
-  content:"";
-
-  position:absolute;
-
-  inset:0;
-
-  background:
-    linear-gradient(
-      135deg,
-      transparent 45%,
-      rgba(0,229,255,.12),
-      transparent 55%
-    );
-
-  animation:
-    sweep 5s linear infinite;
-}
-
-@keyframes sweep{
-
-  from{
-    transform:translateX(-100%);
-  }
-
-  to{
-    transform:translateX(100%);
-  }
-
+    inset 0 0 50px rgba(0,229,255,.08);
 }
 
 .play{
-  position:relative;
-
-  z-index:1;
-
   width:78px;
   height:78px;
 
   display:grid;
-
   place-items:center;
 
   border-radius:50%;
-
-  color:white;
-
-  font-size:1.7rem;
 
   background:
     linear-gradient(
@@ -1097,8 +752,9 @@ h1{
     );
 
   box-shadow:
-    0 0 40px
-    rgba(255,0,70,.4);
+    0 0 40px rgba(255,0,70,.4);
+
+  font-size:1.6rem;
 }
 
 .channel-info{
@@ -1110,74 +766,51 @@ h1{
 }
 
 .channel-info h3{
-  margin:
-    10px 0;
-
   font-size:1.8rem;
 }
 
 .channel-info p{
-  color:var(--muted);
-
-  line-height:1.7;
-
-  margin-bottom:22px;
+  margin:10px 0 22px;
 }
 
-/* =========================================================
+/* =====================================================
    CONNECT
-========================================================= */
+===================================================== */
 
-.connect-card{
+.connect{
   text-align:center;
-}
-
-.connect-card .icon{
-  font-size:2.2rem;
 }
 
 .handle{
   display:flex;
 
-  align-items:center;
-
   justify-content:center;
+  align-items:center;
 
   gap:8px;
 
   margin-top:15px;
 
-  padding:
-    10px 12px;
+  padding:10px;
 
   border-radius:8px;
 
-  border:
-    1px solid rgba(0,229,255,.2);
+  border:1px solid rgba(0,229,255,.2);
 
-  background:
-    rgba(0,229,255,.05);
+  background:rgba(0,229,255,.05);
 
-  color:#dff5fb;
-
-  font-size:.82rem;
-
-  letter-spacing:.4px;
+  color:white;
 
   text-decoration:none;
 
-  transition:.2s;
+  font-size:.82rem;
 }
 
 .handle:hover{
-  border-color:
-    rgba(0,229,255,.5);
-
-  background:
-    rgba(0,229,255,.09);
+  border-color:rgba(0,229,255,.55);
 }
 
-.copybtn{
+.copy{
   border:0;
 
   background:none;
@@ -1185,54 +818,34 @@ h1{
   color:var(--cyan);
 
   cursor:pointer;
-
-  font-size:.9rem;
 }
 
-/* =========================================================
+/* =====================================================
    CTA
-========================================================= */
+===================================================== */
 
 .cta{
-  position:relative;
-
-  overflow:hidden;
-
-  padding:
-    55px 25px;
+  padding:55px 25px;
 
   text-align:center;
 
-  border:
-    1px solid rgba(0,229,255,.3);
-
   border-radius:20px;
 
+  border:1px solid rgba(0,229,255,.3);
+
   background:
-
     radial-gradient(
-      circle at 50% 0%,
-      rgba(0,229,255,.16),
+      circle at center top,
+      rgba(0,229,255,.18),
       transparent 60%
-    ),
-
-    linear-gradient(
-      135deg,
-      rgba(0,229,255,.08),
-      rgba(255,43,214,.06)
     );
 
   box-shadow:
-    0 0 70px
-    rgba(0,229,255,.08);
+    0 0 70px rgba(0,229,255,.08);
 }
 
 .cta h2{
-  margin:
-    9px 0 10px;
-
-  font-size:
-    clamp(1.7rem,4vw,2.4rem);
+  margin:10px 0;
 }
 
 .cta p{
@@ -1241,50 +854,30 @@ h1{
   margin-bottom:25px;
 }
 
-/* =========================================================
+/* =====================================================
    FOOTER
-========================================================= */
+===================================================== */
 
 footer{
-  padding:
-    28px 20px;
+  position:relative;
+  z-index:2;
+
+  padding:28px;
 
   text-align:center;
 
-  color:#7ca0b2;
+  color:#7d9cac;
 
-  border-top:
-    1px solid rgba(255,255,255,.06);
+  border-top:1px solid rgba(255,255,255,.07);
 
   font-size:.72rem;
 
   letter-spacing:1px;
 }
 
-/* =========================================================
-   SCROLL REVEAL
-========================================================= */
-
-.reveal{
-  opacity:0;
-
-  transform:
-    translateY(25px);
-
-  transition:
-    opacity .7s ease,
-    transform .7s ease;
-}
-
-.reveal.visible{
-  opacity:1;
-
-  transform:none;
-}
-
-/* =========================================================
+/* =====================================================
    MOBILE
-========================================================= */
+===================================================== */
 
 @media(max-width:800px){
 
@@ -1292,15 +885,15 @@ footer{
     display:none;
   }
 
-  .navburger{
-    display:flex;
+  .menu{
+    display:block;
   }
 
   .grid{
     grid-template-columns:1fr;
   }
 
-  .video-panel{
+  .channel{
     grid-template-columns:1fr;
   }
 
@@ -1308,28 +901,15 @@ footer{
     grid-template-columns:1fr;
   }
 
-  .hero{
-    padding-top:110px;
-  }
-
-  h1{
-    letter-spacing:4px;
-  }
-
   .city{
-    height:24vh;
+    height:25%;
   }
 
 }
 
 @media(max-width:500px){
 
-  nav{
-    padding:
-      14px 5%;
-  }
-
-  .navstatus{
+  .status{
     display:none;
   }
 
@@ -1341,49 +921,42 @@ footer{
   }
 
   .tagline{
-    font-size:.88rem;
+    font-size:.87rem;
   }
 
-  .hero-buttons{
+  .buttons{
     flex-direction:column;
-
     align-items:center;
   }
 
   .btn{
-    width:
-      min(100%,300px);
+    width:min(100%,300px);
   }
 
   .wrap{
     width:92%;
   }
 
-  .card{
-    padding:22px;
-  }
-
 }
 
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
+/* =====================================================
+   REVEAL
+===================================================== */
 
-@media(prefers-reduced-motion:reduce){
+.reveal{
+  opacity:0;
 
-  *,
-  *::before,
-  *::after{
+  transform:translateY(25px);
 
-    animation-duration:.01ms !important;
+  transition:
+    opacity .7s,
+    transform .7s;
+}
 
-    animation-iteration-count:1 !important;
+.reveal.show{
+  opacity:1;
 
-    scroll-behavior:auto !important;
-
-    transition-duration:.01ms !important;
-  }
-
+  transform:none;
 }
 
 </style>
@@ -1392,14 +965,39 @@ footer{
 
 <body>
 
-<div class="scanlines"></div>
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
 
-<canvas id="particles"></canvas>
+<div class="background">
+
+  <div class="horizon"></div>
+
+  <canvas id="particles"></canvas>
+
+  <div class="city">
+
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+
+  </div>
+
+</div>
 
 
-<!-- =======================================================
+<!-- =====================================================
      NAVIGATION
-======================================================= -->
+===================================================== -->
 
 <nav>
 
@@ -1409,42 +1007,26 @@ footer{
 
   <div class="navlinks">
 
-    <a href="#about">
-      ABOUT
-    </a>
-
-    <a href="#content">
-      CONTENT
-    </a>
-
-    <a href="#connect">
-      CONNECT
-    </a>
-
-    <a href="#channel">
-      CHANNEL
-    </a>
+    <a href="#about">ABOUT</a>
+    <a href="#content">CONTENT</a>
+    <a href="#connect">CONNECT</a>
+    <a href="#channel">CHANNEL</a>
 
   </div>
 
-  <div class="nav-right">
+  <div class="navright">
 
-    <div class="navstatus">
+    <div class="status">
       <i class="dot"></i>
       ONLINE
     </div>
 
     <button
-      class="navburger"
-      id="navburger"
-      aria-label="Toggle menu"
-      aria-expanded="false"
+      class="menu"
+      id="menu"
+      aria-label="Open menu"
     >
-
-      <span></span>
-      <span></span>
-      <span></span>
-
+      ☰
     </button>
 
   </div>
@@ -1453,61 +1035,30 @@ footer{
 
 
 <div
-  class="navdrop"
-  id="navdrop"
+  class="mobile-menu"
+  id="mobileMenu"
 >
 
-  <a href="#about">
-    ABOUT
-  </a>
-
-  <a href="#content">
-    CONTENT
-  </a>
-
-  <a href="#connect">
-    CONNECT
-  </a>
-
-  <a href="#channel">
-    CHANNEL
-  </a>
+  <a href="#about">ABOUT</a>
+  <a href="#content">CONTENT</a>
+  <a href="#connect">CONNECT</a>
+  <a href="#channel">CHANNEL</a>
 
 </div>
 
 
-<!-- =======================================================
-     CYBER CITY
-======================================================= -->
+<!-- =====================================================
+     PAGE CONTENT
+===================================================== -->
 
-<div
-  class="city"
-  aria-hidden="true"
->
+<div class="content">
 
-  <div class="b"></div>
-  <div class="b"></div>
-  <div class="b"></div>
-  <div class="b"></div>
-  <div class="b"></div>
-  <div class="b"></div>
-  <div class="b"></div>
-  <div class="b"></div>
-  <div class="b"></div>
-  <div class="b"></div>
-
-</div>
-
-
-<!-- =======================================================
-     HERO
-======================================================= -->
 
 <section class="hero">
 
-  <div class="hero-content">
+  <div class="hero-inner">
 
-    <div class="scan">
+    <div class="system">
       SYSTEM // MTGAMING // CONNECTED
     </div>
 
@@ -1519,7 +1070,7 @@ footer{
       GAMING CONTENT • CLUTCH MOMENTS • MINECRAFT • THE GRID
     </p>
 
-    <div class="hero-buttons">
+    <div class="buttons">
 
       <a
         class="btn primary"
@@ -1548,10 +1099,6 @@ footer{
 </section>
 
 
-<!-- =======================================================
-     MAIN
-======================================================= -->
-
 <main class="wrap">
 
 
@@ -1578,8 +1125,7 @@ footer{
 
   </div>
 
-
-  <div class="card about-card">
+  <div class="card about">
 
     <p>
       MTgaming is a gaming content hub focused on Minecraft,
@@ -1588,45 +1134,21 @@ footer{
       and become part of the grid.
     </p>
 
-
     <div class="stats">
 
       <div class="stat">
-
-        <span class="stat-number">
-          🎮
-        </span>
-
-        <span class="stat-label">
-          GAMING
-        </span>
-
+        <strong>🎮</strong>
+        <span>GAMING</span>
       </div>
 
-
       <div class="stat">
-
-        <span class="stat-number">
-          ⚔️
-        </span>
-
-        <span class="stat-label">
-          PVP
-        </span>
-
+        <strong>⚔️</strong>
+        <span>PVP</span>
       </div>
 
-
       <div class="stat">
-
-        <span class="stat-number">
-          🔥
-        </span>
-
-        <span class="stat-label">
-          HIGHLIGHTS
-        </span>
-
+        <strong>🔥</strong>
+        <span>HIGHLIGHTS</span>
       </div>
 
     </div>
@@ -1659,23 +1181,17 @@ footer{
 
   </div>
 
-
   <div class="grid">
-
 
     <article class="card">
 
-      <div class="icon">
-        ⛏️
-      </div>
+      <div class="icon">⛏️</div>
 
-      <h3>
-        MINECRAFT
-      </h3>
+      <h3>MINECRAFT</h3>
 
       <p>
         Survival, builds, challenges and
-        completely unexpected Minecraft moments.
+        unexpected Minecraft moments.
       </p>
 
     </article>
@@ -1683,13 +1199,9 @@ footer{
 
     <article class="card">
 
-      <div class="icon">
-        ⚔️
-      </div>
+      <div class="icon">⚔️</div>
 
-      <h3>
-        PVP / BEDWARS
-      </h3>
+      <h3>PVP / BEDWARS</h3>
 
       <p>
         Clutches, fights, strategies and
@@ -1701,13 +1213,9 @@ footer{
 
     <article class="card">
 
-      <div class="icon">
-        🔥
-      </div>
+      <div class="icon">🔥</div>
 
-      <h3>
-        HIGHLIGHTS
-      </h3>
+      <h3>HIGHLIGHTS</h3>
 
       <p>
         The best plays and short-form moments
@@ -1724,6 +1232,7 @@ footer{
 <!-- CHANNEL -->
 
 <section
+  id="channel"
   class="section reveal"
 >
 
@@ -1739,18 +1248,15 @@ footer{
 
   </div>
 
+  <div class="channel">
 
-  <div class="video-panel">
-
-
-    <div class="video-box">
+    <div class="video">
 
       <div class="play">
         ▶
       </div>
 
     </div>
-
 
     <div class="card channel-info">
 
@@ -1807,13 +1313,10 @@ footer{
 
   </div>
 
-
   <div class="grid">
 
 
-    <!-- DISCORD -->
-
-    <article class="card connect-card">
+    <article class="card connect">
 
       <div class="icon">
         💬
@@ -1839,9 +1342,7 @@ footer{
     </article>
 
 
-    <!-- MINECRAFT -->
-
-    <article class="card connect-card">
+    <article class="card connect">
 
       <div class="icon">
         🧱
@@ -1857,15 +1358,12 @@ footer{
 
       <div class="handle">
 
-        <span>
-          MTgamingYTSUB
-        </span>
+        MTgamingYTSUB
 
         <button
-          class="copybtn"
-          type="button"
+          class="copy"
           data-copy="MTgamingYTSUB"
-          aria-label="Copy Minecraft username"
+          type="button"
         >
           ⧉
         </button>
@@ -1875,9 +1373,7 @@ footer{
     </article>
 
 
-    <!-- YOUTUBE -->
-
-    <article class="card connect-card">
+    <article class="card connect">
 
       <div class="icon">
         ▶️
@@ -1909,10 +1405,7 @@ footer{
 
 <!-- CTA -->
 
-<section
-  id="channel"
-  class="cta reveal"
->
+<section class="cta reveal">
 
   <div class="kicker">
     05 // CHANNEL LINK
@@ -1942,20 +1435,18 @@ footer{
 </main>
 
 
-<!-- =======================================================
-     FOOTER
-======================================================= -->
-
 <footer>
   MTgaming © 2026 • ENTER THE GRID
 </footer>
 
+</div>
+
 
 <script>
 
-/* =========================================================
-   PARTICLE SYSTEM
-========================================================= */
+/* =====================================================
+   PARTICLES
+===================================================== */
 
 const canvas =
   document.getElementById("particles");
@@ -1963,10 +1454,10 @@ const canvas =
 const ctx =
   canvas.getContext("2d");
 
-let particles = [];
+let particles=[];
 
 
-function resizeCanvas(){
+function resize(){
 
   canvas.width =
     window.innerWidth;
@@ -1977,9 +1468,9 @@ function resizeCanvas(){
 }
 
 
-function createParticles(){
+function create(){
 
-  const count =
+  const amount =
     Math.min(
       90,
       Math.floor(
@@ -1989,7 +1480,7 @@ function createParticles(){
 
   particles =
     Array.from(
-      {length:count},
+      {length:amount},
       () => ({
 
         x:
@@ -2006,15 +1497,14 @@ function createParticles(){
 
         vx:
           (Math.random()-.5)
-          * .22,
+          *.2,
 
         vy:
           (Math.random()-.5)
-          * .22,
+          *.2,
 
-        alpha:
-          Math.random()
-          * .5 + .12
+        a:
+          Math.random()*.5+.1
 
       })
     );
@@ -2022,7 +1512,7 @@ function createParticles(){
 }
 
 
-function drawParticles(){
+function animate(){
 
   ctx.clearRect(
     0,
@@ -2032,24 +1522,22 @@ function drawParticles(){
   );
 
 
-  for(const p of particles){
+  particles.forEach(p => {
 
     p.x += p.vx;
-
     p.y += p.vy;
 
+    if(p.x<0)
+      p.x=canvas.width;
 
-    if(p.x < 0)
-      p.x = canvas.width;
+    if(p.x>canvas.width)
+      p.x=0;
 
-    if(p.x > canvas.width)
-      p.x = 0;
+    if(p.y<0)
+      p.y=canvas.height;
 
-    if(p.y < 0)
-      p.y = canvas.height;
-
-    if(p.y > canvas.height)
-      p.y = 0;
+    if(p.y>canvas.height)
+      p.y=0;
 
 
     ctx.beginPath();
@@ -2059,7 +1547,7 @@ function drawParticles(){
       p.y,
       p.r,
       0,
-      Math.PI * 2
+      Math.PI*2
     );
 
     ctx.fillStyle =
@@ -2067,76 +1555,57 @@ function drawParticles(){
         0,
         229,
         255,
-        ${p.alpha}
+        ${p.a}
       )`;
 
     ctx.fill();
 
-  }
+  });
 
 
-  requestAnimationFrame(
-    drawParticles
-  );
+  requestAnimationFrame(animate);
 
 }
 
 
-resizeCanvas();
-
-createParticles();
-
-drawParticles();
+resize();
+create();
+animate();
 
 
 window.addEventListener(
   "resize",
   () => {
-
-    resizeCanvas();
-
-    createParticles();
-
+    resize();
+    create();
   }
 );
 
 
-/* =========================================================
+/* =====================================================
    MOBILE MENU
-========================================================= */
+===================================================== */
 
-const navburger =
-  document.getElementById(
-    "navburger"
-  );
+const menu =
+  document.getElementById("menu");
 
-const navdrop =
-  document.getElementById(
-    "navdrop"
-  );
+const mobileMenu =
+  document.getElementById("mobileMenu");
 
 
-navburger.addEventListener(
+menu.addEventListener(
   "click",
   () => {
 
-    const open =
-      navdrop.classList
-        .toggle("open");
-
-    navburger.classList
-      .toggle("open",open);
-
-    navburger.setAttribute(
-      "aria-expanded",
-      String(open)
+    mobileMenu.classList.toggle(
+      "open"
     );
 
   }
 );
 
 
-navdrop
+mobileMenu
   .querySelectorAll("a")
   .forEach(link => {
 
@@ -2144,15 +1613,8 @@ navdrop
       "click",
       () => {
 
-        navdrop.classList
-          .remove("open");
-
-        navburger.classList
-          .remove("open");
-
-        navburger.setAttribute(
-          "aria-expanded",
-          "false"
+        mobileMenu.classList.remove(
+          "open"
         );
 
       }
@@ -2161,12 +1623,12 @@ navdrop
   });
 
 
-/* =========================================================
-   COPY MINECRAFT USERNAME
-========================================================= */
+/* =====================================================
+   COPY USERNAME
+===================================================== */
 
 document
-  .querySelectorAll(".copybtn")
+  .querySelectorAll(".copy")
   .forEach(button => {
 
     button.addEventListener(
@@ -2174,37 +1636,25 @@ document
       async () => {
 
         const value =
-          button.getAttribute(
-            "data-copy"
-          );
+          button.dataset.copy;
 
         try{
 
-          await navigator
-            .clipboard
+          await navigator.clipboard
             .writeText(value);
 
-          const original =
-            button.textContent;
-
-          button.textContent =
-            "✓";
+          button.textContent="✓";
 
           setTimeout(
             () => {
-
-              button.textContent =
-                original;
-
+              button.textContent="⧉";
             },
-            1400
+            1200
           );
 
         }catch(error){
 
-          console.log(
-            "Clipboard unavailable"
-          );
+          console.log(error);
 
         }
 
@@ -2214,15 +1664,9 @@ document
   });
 
 
-/* =========================================================
+/* =====================================================
    SCROLL REVEAL
-========================================================= */
-
-const revealElements =
-  document.querySelectorAll(
-    ".reveal"
-  );
-
+===================================================== */
 
 const observer =
   new IntersectionObserver(
@@ -2231,13 +1675,11 @@ const observer =
       entries.forEach(
         entry => {
 
-          if(
-            entry.isIntersecting
-          ){
+          if(entry.isIntersecting){
 
             entry.target
               .classList
-              .add("visible");
+              .add("show");
 
             observer.unobserve(
               entry.target
@@ -2255,39 +1697,11 @@ const observer =
   );
 
 
-revealElements.forEach(
-  element =>
-    observer.observe(element)
-);
-
-
-/* =========================================================
-   ESCAPE CLOSES MENU
-========================================================= */
-
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if(
-      event.key === "Escape"
-    ){
-
-      navdrop.classList
-        .remove("open");
-
-      navburger.classList
-        .remove("open");
-
-      navburger.setAttribute(
-        "aria-expanded",
-        "false"
-      );
-
-    }
-
-  }
-);
+document
+  .querySelectorAll(".reveal")
+  .forEach(
+    el => observer.observe(el)
+  );
 
 </script>
 
