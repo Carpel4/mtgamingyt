@@ -4,1219 +4,2920 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050816">
-<meta name="description" content="MTgaming — Minecraft, gaming content, highlights and more.">
-<title>MTgaming | Enter the Grid</title>
+
+<meta name="theme-color" content="#03050d">
+<meta name="description" content="MTgaming — Minecraft, gaming, highlights and the latest uploads.">
+
+<title>MTgaming | Enter The Grid</title>
 
 <style>
+
+/* =========================================================
+   MTGAMING V2
+   ONE FILE WEBSITE
+========================================================= */
+
 :root{
-  --cyan:#00e5ff;
-  --blue:#1677ff;
-  --pink:#ff2bd6;
-  --bg:#03050d;
-  --panel:rgba(7,14,30,.72);
-  --text:#edfaff;
-  --muted:#8ba4b8;
+    --cyan:#00e5ff;
+    --cyan2:#73f6ff;
+    --blue:#1677ff;
+    --pink:#ff2bd6;
+    --green:#00ff9d;
+
+    --bg:#02040b;
+    --bg2:#050b18;
+
+    --panel:rgba(6,14,29,.72);
+    --panel2:rgba(8,18,38,.82);
+
+    --text:#effcff;
+    --muted:#8ca6b8;
+
+    --border:rgba(0,229,255,.16);
+    --border2:rgba(0,229,255,.32);
 }
 
-*{box-sizing:border-box}
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-  margin:0;
-  color:var(--text);
-  background:var(--bg);
-  font-family:Segoe UI,Arial,sans-serif;
-  overflow-x:hidden;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Segoe UI,Arial,sans-serif;
+    overflow-x:hidden;
 }
 
 a{
-  color:inherit;
+    color:inherit;
 }
 
-/* =========================
+/* =========================================================
    BACKGROUND
-========================= */
+========================================================= */
 
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-4;
-  background:
-    radial-gradient(circle at 50% 15%,rgba(0,229,255,.16),transparent 28%),
-    radial-gradient(circle at 85% 70%,rgba(255,43,214,.09),transparent 25%),
-    linear-gradient(180deg,#03050d 0%,#061226 60%,#02030a 100%);
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-10;
+
+    background:
+        radial-gradient(
+            circle at 50% 5%,
+            rgba(0,229,255,.18),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 60%,
+            rgba(255,43,214,.10),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 10% 80%,
+            rgba(22,119,255,.10),
+            transparent 25%
+        ),
+        linear-gradient(
+            180deg,
+            #02040b 0%,
+            #061224 55%,
+            #02040b 100%
+        );
 }
 
-body:after{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-3;
-  pointer-events:none;
-  background-image:
-    linear-gradient(rgba(0,229,255,.055) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,229,255,.055) 1px,transparent 1px);
-  background-size:48px 48px;
-  mask-image:linear-gradient(
-    to bottom,
-    black 0%,
-    black 60%,
-    transparent 100%
-  );
-  animation:grid 10s linear infinite;
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-9;
+    pointer-events:none;
+
+    background-image:
+        linear-gradient(
+            rgba(0,229,255,.045) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0,229,255,.045) 1px,
+            transparent 1px
+        );
+
+    background-size:50px 50px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black 0%,
+            black 55%,
+            transparent 100%
+        );
+
+    animation:gridMove 12s linear infinite;
 }
 
-@keyframes grid{
-  to{
-    background-position:0 48px,48px 0;
-  }
+@keyframes gridMove{
+    to{
+        background-position:
+            0 50px,
+            50px 0;
+    }
 }
+
+/* =========================================================
+   SCANLINES
+========================================================= */
+
+.scanlines{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:50;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.012) 0px,
+            rgba(255,255,255,.012) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    opacity:.25;
+}
+
+/* =========================================================
+   PARTICLES
+========================================================= */
 
 #particles{
-  position:fixed;
-  inset:0;
-  width:100%;
-  height:100%;
-  z-index:-2;
-  pointer-events:none;
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:-5;
 }
 
-/* =========================
-   NAVIGATION
-========================= */
+/* =========================================================
+   MOUSE GLOW
+========================================================= */
+
+.cursor-glow{
+    position:fixed;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:-4;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,229,255,.08),
+            transparent 65%
+        );
+
+    transform:translate(-50%,-50%);
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
 
 nav{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:10;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:16px 5%;
-  background:rgba(2,5,13,.62);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(0,229,255,.12);
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+
+    height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 5%;
+
+    z-index:20;
+
+    background:rgba(2,5,13,.68);
+    backdrop-filter:blur(16px);
+
+    border-bottom:
+        1px solid rgba(0,229,255,.12);
 }
 
+/* LOGO */
+
 .logo{
-  font-weight:900;
-  letter-spacing:2px;
-  font-size:1.15rem;
-  transition:.25s;
-  filter:drop-shadow(0 0 10px rgba(0,229,255,.18));
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    text-decoration:none;
+
+    font-size:1.18rem;
+    font-weight:950;
+    letter-spacing:2px;
+}
+
+.logo-box{
+    width:34px;
+    height:34px;
+
+    display:grid;
+    place-items:center;
+
+    border:1px solid var(--cyan);
+    border-radius:7px;
+
+    color:white;
+
+    font-weight:1000;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,229,255,.18),
+            rgba(255,43,214,.10)
+        );
+
+    box-shadow:
+        0 0 12px rgba(0,229,255,.25),
+        inset 0 0 15px rgba(0,229,255,.08);
+
+    text-shadow:
+        0 0 8px var(--cyan);
 }
 
 .logo span{
-  color:var(--cyan);
-  text-shadow:0 0 12px var(--cyan);
+    color:var(--cyan);
+    text-shadow:
+        0 0 10px var(--cyan);
 }
 
-.logo:hover{
-  transform:translateY(-1px) scale(1.03);
-}
+/* NAV LINKS */
 
 .navlinks{
-  display:flex;
-  gap:22px;
-  font-size:.86rem;
-  color:#9bb1c1;
+    display:flex;
+    gap:28px;
 }
 
 .navlinks a{
-  text-decoration:none;
-  transition:.2s;
-  position:relative;
+    position:relative;
+
+    text-decoration:none;
+
+    font-size:.78rem;
+    letter-spacing:1.5px;
+
+    color:#8fa9b9;
+
+    transition:.25s;
 }
 
-.navlinks a:after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-6px;
-  width:0;
-  height:1px;
-  background:var(--cyan);
-  box-shadow:0 0 8px var(--cyan);
-  transition:.25s;
+.navlinks a::after{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:-8px;
+
+    width:0;
+    height:1px;
+
+    background:var(--cyan);
+
+    box-shadow:
+        0 0 8px var(--cyan);
+
+    transition:.25s;
 }
 
 .navlinks a:hover{
-  color:var(--cyan);
+    color:var(--cyan);
 }
 
-.navlinks a:hover:after{
-  width:100%;
+.navlinks a:hover::after{
+    width:100%;
 }
 
-.navburger{
-  display:none;
-  background:none;
-  border:1px solid rgba(0,229,255,.3);
-  border-radius:6px;
-  width:38px;
-  height:34px;
-  cursor:pointer;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:5px;
+/* ONLINE */
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
-.navburger span{
-  width:18px;
-  height:2px;
-  background:var(--cyan);
-  box-shadow:0 0 6px var(--cyan);
-  transition:.25s;
-}
+.online{
+    display:flex;
+    align-items:center;
 
-.navburger.open span:nth-child(1){
-  transform:translateY(7px) rotate(45deg);
-}
+    padding:7px 11px;
 
-.navburger.open span:nth-child(2){
-  opacity:0;
-}
+    border:
+        1px solid rgba(0,255,157,.22);
 
-.navburger.open span:nth-child(3){
-  transform:translateY(-7px) rotate(-45deg);
-}
+    border-radius:999px;
 
-.navdrop{
-  display:none;
-  position:fixed;
-  top:60px;
-  left:0;
-  right:0;
-  z-index:9;
-  background:rgba(2,5,13,.95);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(0,229,255,.18);
-  flex-direction:column;
-  padding:10px 5% 18px;
-}
+    color:#7fffe9;
 
-.navdrop.open{
-  display:flex;
-}
+    font-size:.68rem;
+    letter-spacing:1px;
 
-.navdrop a{
-  color:#cfe6f0;
-  text-decoration:none;
-  font-size:.92rem;
-  letter-spacing:1px;
-  padding:12px 4px;
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
-
-.navdrop a:hover{
-  color:var(--cyan);
-}
-
-.navstatus{
-  font-size:.72rem;
-  color:#7fffe9;
-  letter-spacing:1px;
-  padding:6px 10px;
-  border:1px solid rgba(0,229,255,.25);
-  border-radius:999px;
-  background:rgba(0,229,255,.05);
+    background:
+        rgba(0,255,157,.04);
 }
 
 .dot{
-  display:inline-block;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#00ff9d;
-  box-shadow:0 0 10px #00ff9d;
-  margin-right:6px;
+    width:7px;
+    height:7px;
+
+    margin-right:7px;
+
+    border-radius:50%;
+
+    background:var(--green);
+
+    box-shadow:
+        0 0 10px var(--green);
+
+    animation:onlinePulse 2s infinite;
 }
 
-/* =========================
+@keyframes onlinePulse{
+    50%{
+        opacity:.45;
+    }
+}
+
+/* MOBILE BUTTON */
+
+.navburger{
+    display:none;
+
+    width:38px;
+    height:35px;
+
+    border:
+        1px solid rgba(0,229,255,.3);
+
+    border-radius:7px;
+
+    background:rgba(0,229,255,.03);
+
+    cursor:pointer;
+
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    gap:5px;
+}
+
+.navburger span{
+    width:18px;
+    height:2px;
+
+    background:var(--cyan);
+
+    box-shadow:
+        0 0 7px var(--cyan);
+
+    transition:.25s;
+}
+
+.navburger.open span:nth-child(1){
+    transform:
+        translateY(7px)
+        rotate(45deg);
+}
+
+.navburger.open span:nth-child(2){
+    opacity:0;
+}
+
+.navburger.open span:nth-child(3){
+    transform:
+        translateY(-7px)
+        rotate(-45deg);
+}
+
+/* MOBILE MENU */
+
+.navdrop{
+    display:none;
+
+    position:fixed;
+
+    top:72px;
+    left:0;
+    right:0;
+
+    z-index:19;
+
+    padding:10px 6% 20px;
+
+    background:
+        rgba(2,5,13,.96);
+
+    backdrop-filter:blur(18px);
+
+    border-bottom:
+        1px solid rgba(0,229,255,.2);
+}
+
+.navdrop.open{
+    display:flex;
+    flex-direction:column;
+}
+
+.navdrop a{
+    padding:14px 4px;
+
+    text-decoration:none;
+
+    color:#c9e3ec;
+
+    font-size:.85rem;
+    letter-spacing:2px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.05);
+}
+
+/* =========================================================
    HERO
-========================= */
+========================================================= */
 
 .hero{
-  min-height:100vh;
-  display:grid;
-  place-items:center;
-  text-align:center;
-  padding:120px 20px 70px;
-  position:relative;
+    min-height:100vh;
+
+    display:grid;
+    place-items:center;
+
+    position:relative;
+
+    padding:
+        130px 20px
+        100px;
+
+    text-align:center;
 }
 
-.scan{
-  display:inline-flex;
-  gap:8px;
-  align-items:center;
-  color:#77ddec;
-  font-size:.72rem;
-  letter-spacing:2px;
-  border:1px solid rgba(0,229,255,.3);
-  padding:8px 13px;
-  border-radius:5px;
-  background:rgba(0,229,255,.045);
-  animation:scanPulse 2.8s ease-in-out infinite;
+.hero-inner{
+    max-width:1050px;
+    width:100%;
 }
 
-@keyframes scanPulse{
-  0%,100%{
-    box-shadow:0 0 0 rgba(0,229,255,0);
-  }
-  50%{
-    box-shadow:0 0 22px rgba(0,229,255,.12);
-  }
+/* SYSTEM BADGE */
+
+.system-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+
+    padding:9px 14px;
+
+    border:
+        1px solid rgba(0,229,255,.3);
+
+    border-radius:5px;
+
+    background:
+        rgba(0,229,255,.045);
+
+    color:#7eeaf7;
+
+    font-size:.68rem;
+    letter-spacing:2px;
+
+    box-shadow:
+        0 0 25px rgba(0,229,255,.06);
+
+    animation:badgeGlow 3s ease-in-out infinite;
 }
 
-h1{
-  margin:22px 0 10px;
-  font-size:clamp(4rem,12vw,9.5rem);
-  line-height:.78;
-  letter-spacing:8px;
-  font-weight:1000;
-  text-transform:uppercase;
-  color:#f7fdff;
-
-  background:linear-gradient(
-    90deg,
-    #fff,
-    #8ff7ff 45%,
-    #ffb4f3
-  );
-
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
-
-  text-shadow:
-    0 0 28px rgba(0,229,255,.28),
-    5px 5px 0 rgba(255,43,214,.12);
+@keyframes badgeGlow{
+    50%{
+        box-shadow:
+            0 0 25px rgba(0,229,255,.16);
+    }
 }
 
-.tagline{
-  font-size:1.12rem;
-  color:#a7bdcc;
-  letter-spacing:1px;
+/* HERO TITLE */
+
+.hero h1{
+    margin-top:30px;
+
+    font-size:
+        clamp(4.2rem,13vw,10rem);
+
+    line-height:.78;
+
+    letter-spacing:
+        clamp(3px,1vw,10px);
+
+    font-weight:1000;
+
+    text-transform:uppercase;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff 0%,
+            #8ff7ff 45%,
+            #ffffff 70%,
+            #ffb4f3 100%
+        );
+
+    background-size:200% auto;
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    animation:titleFlow 5s linear infinite;
+
+    filter:
+        drop-shadow(0 0 18px rgba(0,229,255,.35));
 }
+
+@keyframes titleFlow{
+    to{
+        background-position:200% center;
+    }
+}
+
+/* HERO TAGLINE */
+
+.hero-sub{
+    max-width:700px;
+
+    margin:
+        25px auto 0;
+
+    color:#a5bac7;
+
+    font-size:1rem;
+
+    line-height:1.7;
+
+    letter-spacing:
+        1.5px;
+}
+
+/* HERO BUTTONS */
 
 .hero-buttons{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-top:30px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+
+    gap:13px;
+
+    margin-top:32px;
 }
 
 .btn{
-  display:inline-block;
-  position:relative;
-  overflow:hidden;
-  text-decoration:none;
-  font-weight:800;
-  letter-spacing:1px;
-  padding:14px 23px;
-  border-radius:7px;
-  transition:.25s;
+    position:relative;
+    overflow:hidden;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    min-width:175px;
+
+    padding:14px 23px;
+
+    border-radius:7px;
+
+    text-decoration:none;
+
+    font-size:.78rem;
+
+    font-weight:900;
+
+    letter-spacing:1.5px;
+
+    transition:
+        transform .25s,
+        box-shadow .25s;
 }
 
-.btn:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  transform:translateX(-110%);
-  background:linear-gradient(
-    100deg,
-    transparent,
-    rgba(255,255,255,.22),
-    transparent
-  );
-  transition:.55s;
+.btn::before{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            100deg,
+            transparent,
+            rgba(255,255,255,.3),
+            transparent
+        );
+
+    transform:translateX(-110%);
+
+    transition:.6s;
 }
 
-.btn:hover:before{
-  transform:translateX(110%);
-}
-
-.primary{
-  background:linear-gradient(90deg,#00bcd4,#1677ff);
-  box-shadow:0 0 24px rgba(0,229,255,.32);
-}
-
-.secondary{
-  border:1px solid rgba(0,229,255,.35);
-  background:rgba(255,255,255,.035);
+.btn:hover::before{
+    transform:translateX(110%);
 }
 
 .btn:hover{
-  transform:translateY(-4px);
-  box-shadow:0 0 28px rgba(0,229,255,.5);
+    transform:
+        translateY(-4px);
 }
+
+.primary{
+    color:white;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00aeca,
+            #1677ff
+        );
+
+    box-shadow:
+        0 0 25px rgba(0,229,255,.28);
+}
+
+.primary:hover{
+    box-shadow:
+        0 0 40px rgba(0,229,255,.5);
+}
+
+.secondary{
+    border:
+        1px solid rgba(0,229,255,.3);
+
+    background:
+        rgba(255,255,255,.035);
+}
+
+.secondary:hover{
+    border-color:var(--cyan);
+}
+
+/* HERO MINI STATS */
+
+.hero-mini{
+    display:flex;
+    justify-content:center;
+    gap:35px;
+
+    margin-top:55px;
+}
+
+.mini{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.mini strong{
+    font-size:1.1rem;
+    color:white;
+}
+
+.mini span{
+    color:#607b8e;
+    font-size:.62rem;
+    letter-spacing:2px;
+}
+
+/* SCROLL */
 
 .scroll{
-  position:absolute;
-  bottom:25px;
-  color:#557287;
-  font-size:.7rem;
-  letter-spacing:3px;
+    position:absolute;
+
+    bottom:28px;
+
+    color:#4e6879;
+
+    font-size:.62rem;
+
+    letter-spacing:3px;
+
+    animation:scrollBounce 2s infinite;
 }
 
-/* =========================
+@keyframes scrollBounce{
+    50%{
+        transform:translateY(5px);
+    }
+}
+
+/* =========================================================
    CITY
-========================= */
+========================================================= */
 
 .city{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:30vh;
-  z-index:-1;
-  display:flex;
-  align-items:flex-end;
-  gap:6px;
-  justify-content:center;
-  opacity:.78;
+    position:fixed;
+
+    bottom:0;
+    left:0;
+    right:0;
+
+    height:28vh;
+
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+
+    gap:5px;
+
+    z-index:-3;
+
+    opacity:.65;
+
+    pointer-events:none;
 }
 
-.b{
-  width:clamp(28px,5vw,70px);
-  position:relative;
-  background:linear-gradient(180deg,#081a2d,#02050b);
-  border:1px solid rgba(0,229,255,.28);
-  box-shadow:0 0 15px rgba(0,229,255,.1);
+.building{
+    position:relative;
+
+    width:
+        clamp(26px,5vw,70px);
+
+    background:
+        linear-gradient(
+            180deg,
+            #081c30,
+            #02050b
+        );
+
+    border:
+        1px solid rgba(0,229,255,.22);
+
+    box-shadow:
+        0 0 12px rgba(0,229,255,.07);
 }
 
-.b:after{
-  content:"";
-  position:absolute;
-  inset:12px 7px;
-  background:repeating-linear-gradient(
-    to bottom,
-    rgba(0,229,255,.8) 0 3px,
-    transparent 3px 15px
-  );
-  opacity:.55;
+.building::after{
+    content:"";
+
+    position:absolute;
+
+    inset:12px 7px;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(0,229,255,.75) 0 3px,
+            transparent 3px 15px
+        );
+
+    opacity:.5;
 }
 
-.b:nth-child(1){height:45%}
-.b:nth-child(2){height:68%}
-.b:nth-child(3){height:53%}
-.b:nth-child(4){height:87%}
-.b:nth-child(5){height:62%}
-.b:nth-child(6){height:78%}
-.b:nth-child(7){height:48%}
-.b:nth-child(8){height:93%}
-.b:nth-child(9){height:58%}
-.b:nth-child(10){height:73%}
+.building:nth-child(1){height:42%}
+.building:nth-child(2){height:65%}
+.building:nth-child(3){height:51%}
+.building:nth-child(4){height:84%}
+.building:nth-child(5){height:61%}
+.building:nth-child(6){height:76%}
+.building:nth-child(7){height:48%}
+.building:nth-child(8){height:94%}
+.building:nth-child(9){height:57%}
+.building:nth-child(10){height:72%}
+.building:nth-child(11){height:44%}
+.building:nth-child(12){height:66%}
 
-/* =========================
-   CONTENT
-========================= */
+/* =========================================================
+   MAIN
+========================================================= */
 
-.wrap{
-  width:min(1050px,90%);
-  margin:auto;
-  padding:70px 0 100px;
+.container{
+    width:min(1100px,90%);
+
+    margin:auto;
+
+    padding:
+        90px 0
+        110px;
 }
 
-.section-title{
-  text-align:center;
-  margin-bottom:28px;
+section{
+    scroll-margin-top:90px;
+}
+
+/* SECTION HEADING */
+
+.section-heading{
+    text-align:center;
+
+    margin-bottom:32px;
 }
 
 .kicker{
-  color:var(--cyan);
-  font-size:.7rem;
-  letter-spacing:3px;
+    color:var(--cyan);
+
+    font-size:.65rem;
+
+    letter-spacing:3px;
+
+    font-weight:800;
 }
 
-.section-title h2{
-  font-size:2.2rem;
-  margin:8px 0;
+.section-heading h2{
+    margin-top:9px;
+
+    font-size:
+        clamp(1.7rem,4vw,2.4rem);
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
+.section-heading p{
+    margin:
+        10px auto 0;
+
+    max-width:600px;
+
+    color:var(--muted);
+
+    font-size:.9rem;
+
+    line-height:1.6;
 }
+
+/* =========================================================
+   GLASS CARD
+========================================================= */
 
 .card{
-  position:relative;
-  overflow:hidden;
-  padding:26px;
-  border-radius:14px;
-  border:1px solid rgba(0,229,255,.16);
-  background:var(--panel);
-  backdrop-filter:blur(10px);
-  box-shadow:inset 0 0 30px rgba(0,229,255,.018);
-  transition:.25s;
+    position:relative;
+
+    padding:27px;
+
+    border-radius:15px;
+
+    border:
+        1px solid var(--border);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(7,17,34,.82),
+            rgba(4,10,23,.68)
+        );
+
+    backdrop-filter:blur(12px);
+
+    overflow:hidden;
+
+    transition:
+        transform .3s,
+        border-color .3s,
+        box-shadow .3s;
 }
 
-.card:before{
-  content:"";
-  position:absolute;
-  left:12%;
-  right:12%;
-  top:0;
-  height:1px;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    var(--cyan),
-    transparent
-  );
-  opacity:.35;
-  box-shadow:0 0 12px var(--cyan);
+.card::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:12%;
+    right:12%;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--cyan),
+            transparent
+        );
+
+    box-shadow:
+        0 0 12px var(--cyan);
+
+    opacity:.4;
+}
+
+.card::after{
+    content:"";
+
+    position:absolute;
+
+    width:100px;
+    height:100px;
+
+    top:-60px;
+    right:-50px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,229,255,.1),
+            transparent 70%
+        );
 }
 
 .card:hover{
-  transform:translateY(-6px);
-  border-color:rgba(0,229,255,.45);
-  box-shadow:
-    0 12px 35px rgba(0,229,255,.08),
-    0 0 20px rgba(0,229,255,.05);
+    transform:translateY(-7px);
+
+    border-color:
+        rgba(0,229,255,.4);
+
+    box-shadow:
+        0 18px 45px rgba(0,229,255,.08);
 }
 
-.icon{
-  font-size:2rem;
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about-card{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:25px;
+
+    align-items:center;
 }
 
-.card h3{
-  margin:12px 0 8px;
+.about-main h3{
+    font-size:1.5rem;
+
+    margin-bottom:12px;
 }
 
-.card p{
-  margin:0;
-  color:var(--muted);
-  line-height:1.6;
+.about-main p{
+    color:var(--muted);
+
+    line-height:1.75;
+
+    font-size:.92rem;
 }
 
-.cta{
-  margin-top:70px;
-  padding:42px 25px;
-  text-align:center;
-  border-radius:18px;
-  border:1px solid rgba(0,229,255,.25);
-  background:linear-gradient(
-    135deg,
-    rgba(0,229,255,.07),
-    rgba(255,43,214,.045)
-  );
-  box-shadow:0 0 50px rgba(0,229,255,.06);
+/* TERMINAL */
+
+.terminal{
+    border:
+        1px solid rgba(0,229,255,.18);
+
+    border-radius:11px;
+
+    overflow:hidden;
+
+    background:#02060e;
 }
 
-.cta h2{
-  font-size:2rem;
-  margin:0 0 10px;
+.terminal-top{
+    display:flex;
+    align-items:center;
+    gap:6px;
+
+    padding:10px 13px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.06);
+}
+
+.terminal-dot{
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#607b8e;
+}
+
+.terminal-title{
+    margin-left:6px;
+
+    color:#557284;
+
+    font-size:.62rem;
+
+    letter-spacing:1px;
+}
+
+.terminal-body{
+    padding:20px;
+
+    font-family:
+        Consolas,
+        monospace;
+
+    font-size:.72rem;
+
+    line-height:2;
+
+    color:#78dce9;
+}
+
+.terminal-body .white{
+    color:#dffaff;
+}
+
+.terminal-body .pink{
+    color:#ff7be8;
+}
+
+.terminal-body .green{
+    color:#6fffc0;
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:14px;
+
+    margin-top:70px;
+}
+
+.stat-card{
+    text-align:center;
+
+    padding:24px 15px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:13px;
+
+    background:
+        rgba(5,13,27,.65);
+
+    transition:.25s;
+}
+
+.stat-card:hover{
+    transform:translateY(-5px);
+
+    border-color:
+        rgba(0,229,255,.4);
+
+    box-shadow:
+        0 0 25px rgba(0,229,255,.06);
+}
+
+.stat-icon{
+    font-size:1.4rem;
+
+    margin-bottom:9px;
+}
+
+.stat-number{
+    font-size:1.45rem;
+
+    font-weight:900;
+
+    color:white;
+
+    text-shadow:
+        0 0 12px rgba(0,229,255,.35);
+}
+
+.stat-label{
+    margin-top:5px;
+
+    color:#617d90;
+
+    font-size:.6rem;
+
+    letter-spacing:2px;
+}
+
+/* =========================================================
+   CONTENT GRID
+========================================================= */
+
+.content-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:16px;
+}
+
+.content-card{
+    min-height:230px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+}
+
+.content-icon{
+    font-size:2.7rem;
+
+    margin-bottom:auto;
+
+    filter:
+        drop-shadow(
+            0 0 12px rgba(0,229,255,.3)
+        );
+}
+
+.content-card h3{
+    margin-top:25px;
+
+    font-size:1rem;
+
+    letter-spacing:1px;
+}
+
+.content-card p{
+    margin-top:7px;
+
+    color:var(--muted);
+
+    line-height:1.55;
+
+    font-size:.82rem;
+}
+
+.card-tag{
+    display:inline-block;
+
+    width:max-content;
+
+    margin-top:14px;
+
+    padding:5px 8px;
+
+    border:
+        1px solid rgba(0,229,255,.2);
+
+    border-radius:4px;
+
+    color:#72dce9;
+
+    font-size:.56rem;
+
+    letter-spacing:1.5px;
+}
+
+/* =========================================================
+   FEATURED
+========================================================= */
+
+.featured{
+    display:grid;
+
+    grid-template-columns:
+        1.35fr .65fr;
+
+    gap:16px;
+
+    margin-top:70px;
+}
+
+.featured-main{
+    min-height:310px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    padding:35px;
+
+    border-radius:17px;
+
+    border:
+        1px solid rgba(0,229,255,.22);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,229,255,.08),
+            rgba(255,43,214,.055)
+        );
+
+    overflow:hidden;
+
+    position:relative;
+}
+
+.featured-main::before{
+    content:"MT";
+
+    position:absolute;
+
+    top:-50px;
+    right:-10px;
+
+    font-size:15rem;
+
+    line-height:1;
+
+    font-weight:1000;
+
+    color:rgba(0,229,255,.025);
+
+    pointer-events:none;
+}
+
+.featured-main h2{
+    position:relative;
+
+    font-size:
+        clamp(1.8rem,4vw,3rem);
+
+    max-width:600px;
+
+    margin:12px 0;
+}
+
+.featured-main p{
+    position:relative;
+
+    max-width:560px;
+
+    color:var(--muted);
+
+    line-height:1.6;
+
+    font-size:.88rem;
+}
+
+.featured-side{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.featured-small{
+    flex:1;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    padding:25px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:14px;
+
+    background:
+        rgba(6,14,29,.7);
+}
+
+.featured-small strong{
+    color:var(--cyan);
+
+    font-size:.62rem;
+
+    letter-spacing:2px;
+}
+
+.featured-small h3{
+    margin-top:8px;
+}
+
+.featured-small p{
+    margin-top:7px;
+
+    color:var(--muted);
+
+    font-size:.78rem;
+
+    line-height:1.5;
+}
+
+/* =========================================================
+   CONNECT
+========================================================= */
+
+.connect-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:16px;
 }
 
 .connect-card{
-  text-align:center;
+    text-align:center;
+
+    padding:30px 22px;
 }
 
-.connect-card .icon{
-  font-size:2.1rem;
+.connect-icon{
+    font-size:2.2rem;
+
+    margin-bottom:13px;
+}
+
+.connect-card h3{
+    font-size:.95rem;
+
+    letter-spacing:1px;
 }
 
 .connect-card p{
-  font-size:.9rem;
-  margin-bottom:4px;
+    margin-top:7px;
+
+    color:var(--muted);
+
+    font-size:.8rem;
+
+    line-height:1.5;
 }
 
-.connect-card .handle{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  margin-top:10px;
-  padding:9px 12px;
-  border-radius:8px;
-  background:rgba(0,229,255,.06);
-  border:1px solid rgba(0,229,255,.18);
-  font-size:.88rem;
-  letter-spacing:.5px;
-  color:#dff5fb;
+.connect-link{
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    gap:7px;
+
+    margin-top:17px;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+    font-size:.68rem;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    background:
+        rgba(0,229,255,.05);
+
+    border:
+        1px solid rgba(0,229,255,.17);
+
+    transition:.25s;
 }
 
-.copybtn{
-  background:none;
-  border:none;
-  color:var(--cyan);
-  cursor:pointer;
-  font-size:.85rem;
-  line-height:1;
-  padding:2px;
+.connect-link:hover{
+    border-color:var(--cyan);
+
+    color:var(--cyan);
+
+    box-shadow:
+        0 0 18px rgba(0,229,255,.08);
 }
 
-.copybtn:hover{
-  text-shadow:0 0 8px var(--cyan);
+/* =========================================================
+   CTA
+========================================================= */
+
+.cta{
+    position:relative;
+
+    overflow:hidden;
+
+    margin-top:70px;
+
+    padding:
+        55px 25px;
+
+    text-align:center;
+
+    border-radius:19px;
+
+    border:
+        1px solid rgba(0,229,255,.25);
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0,229,255,.09),
+            transparent 55%
+        ),
+        rgba(5,13,27,.75);
+
+    box-shadow:
+        0 0 60px rgba(0,229,255,.055);
 }
 
-.connect-card a.handle{
-  text-decoration:none;
+.cta::before{
+    content:"";
+
+    position:absolute;
+
+    left:-20%;
+    right:-20%;
+
+    top:50%;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(0,229,255,.5),
+            transparent
+        );
+
+    animation:ctaScan 4s linear infinite;
 }
 
-.connect-card a.handle:hover{
-  border-color:rgba(0,229,255,.45);
+@keyframes ctaScan{
+    0%{
+        transform:translateY(-130px);
+    }
+
+    100%{
+        transform:translateY(130px);
+    }
 }
 
-/* =========================
+.cta h2{
+    position:relative;
+
+    font-size:
+        clamp(1.7rem,4vw,2.5rem);
+
+    margin:10px 0;
+}
+
+.cta p{
+    position:relative;
+
+    color:var(--muted);
+
+    font-size:.85rem;
+
+    margin-bottom:22px;
+}
+
+/* =========================================================
    FOOTER
-========================= */
+========================================================= */
 
 footer{
-  text-align:center;
-  padding:25px;
-  color:#7fdcec;
-  border-top:1px solid rgba(255,255,255,.05);
-  font-size:.78rem;
-  text-shadow:
-    0 0 8px rgba(0,229,255,.55),
-    0 0 20px rgba(0,229,255,.25);
-  letter-spacing:1px;
+    text-align:center;
+
+    padding:28px 20px;
+
+    border-top:
+        1px solid rgba(255,255,255,.05);
+
+    color:#618193;
+
+    font-size:.68rem;
+
+    letter-spacing:1.5px;
 }
 
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:700px){
-
-  .navlinks{
-    display:none;
-  }
-
-  .navstatus{
-    font-size:.65rem;
-  }
-
-  .navburger{
-    display:flex;
-  }
-
-  h1{
-    letter-spacing:4px;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .hero{
-    padding-top:100px;
-  }
-
-  .city{
-    height:22vh;
-  }
-
-  .tagline{
-    font-size:.95rem;
-    line-height:1.5;
-  }
-
-  .section-title h2{
-    font-size:1.8rem;
-  }
+footer span{
+    color:var(--cyan);
 }
 
-/* =========================
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+.reveal{
+    opacity:0;
+
+    transform:
+        translateY(25px);
+
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
+}
+
+.reveal.show{
+    opacity:1;
+
+    transform:
+        translateY(0);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:800px){
+
+    .navlinks{
+        display:none;
+    }
+
+    .navburger{
+        display:flex;
+    }
+
+    .hero-mini{
+        gap:22px;
+    }
+
+    .about-card{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .content-grid{
+        grid-template-columns:1fr;
+    }
+
+    .featured{
+        grid-template-columns:1fr;
+    }
+
+    .connect-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:500px){
+
+    nav{
+        padding:0 4%;
+    }
+
+    .online{
+        display:none;
+    }
+
+    .hero{
+        padding-top:115px;
+    }
+
+    .hero h1{
+        font-size:4rem;
+
+        letter-spacing:2px;
+    }
+
+    .hero-sub{
+        font-size:.82rem;
+    }
+
+    .hero-mini{
+        gap:15px;
+    }
+
+    .mini strong{
+        font-size:.9rem;
+    }
+
+    .mini span{
+        font-size:.52rem;
+    }
+
+    .container{
+        width:92%;
+    }
+
+    .featured-main{
+        padding:27px;
+        min-height:280px;
+    }
+
+    .stats{
+        gap:10px;
+    }
+
+    .stat-card{
+        padding:20px 10px;
+    }
+
+}
+
+/* =========================================================
    REDUCED MOTION
-========================= */
+========================================================= */
 
 @media(prefers-reduced-motion:reduce){
 
-  html{
-    scroll-behavior:auto;
-  }
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        scroll-behavior:auto!important;
+        transition-duration:.01ms!important;
+    }
 
-  *,
-  *:before,
-  *:after{
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    transition-duration:.01ms!important;
-  }
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     NAV
-========================= -->
+<div class="scanlines"></div>
 
-<nav>
-
-  <div class="logo">
-    MT<span>gaming</span>
-  </div>
-
-  <div class="navlinks">
-    <a href="#about">ABOUT</a>
-    <a href="#content">CONTENT</a>
-    <a href="#connect">CONNECT</a>
-    <a href="#channel">CHANNEL</a>
-  </div>
-
-  <div style="display:flex;align-items:center;gap:12px">
-
-    <div class="navstatus">
-      <i class="dot"></i>ONLINE
-    </div>
-
-    <button
-      class="navburger"
-      id="navburger"
-      aria-label="Toggle menu"
-      aria-expanded="false"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-  </div>
-
-</nav>
-
-<div class="navdrop" id="navdrop">
-
-  <a href="#about">ABOUT</a>
-  <a href="#content">CONTENT</a>
-  <a href="#connect">CONNECT</a>
-  <a href="#channel">CHANNEL</a>
-
-</div>
-
-<!-- PARTICLES -->
+<div class="cursor-glow" id="cursorGlow"></div>
 
 <canvas id="particles"></canvas>
 
-<!-- CITY -->
 
-<div class="city" aria-hidden="true">
+<!-- =======================================================
+     NAVIGATION
+======================================================= -->
 
-  <div class="b"></div>
-  <div class="b"></div>
-  <div class="b"></div>
-  <div class="b"></div>
-  <div class="b"></div>
-  <div class="b"></div>
-  <div class="b"></div>
-  <div class="b"></div>
-  <div class="b"></div>
-  <div class="b"></div>
+<nav>
+
+    <a href="#" class="logo">
+
+        <div class="logo-box">
+            MT
+        </div>
+
+        <div>
+            MT<span>gaming</span>
+        </div>
+
+    </a>
+
+
+    <div class="navlinks">
+
+        <a href="#about">
+            ABOUT
+        </a>
+
+        <a href="#content">
+            CONTENT
+        </a>
+
+        <a href="#featured">
+            FEATURED
+        </a>
+
+        <a href="#connect">
+            CONNECT
+        </a>
+
+    </div>
+
+
+    <div class="nav-right">
+
+        <div class="online">
+
+            <i class="dot"></i>
+
+            ONLINE
+
+        </div>
+
+        <button
+            class="navburger"
+            id="navburger"
+            aria-label="Open menu"
+            aria-expanded="false"
+        >
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+    </div>
+
+</nav>
+
+
+<div class="navdrop" id="navdrop">
+
+    <a href="#about">ABOUT</a>
+
+    <a href="#content">CONTENT</a>
+
+    <a href="#featured">FEATURED</a>
+
+    <a href="#connect">CONNECT</a>
 
 </div>
 
-<!-- =========================
+
+<!-- =======================================================
+     CITY
+======================================================= -->
+
+<div class="city" aria-hidden="true">
+
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+
+</div>
+
+
+<!-- =======================================================
      HERO
-========================= -->
+======================================================= -->
 
 <section class="hero">
 
-  <div>
+    <div class="hero-inner">
 
-    <div class="scan">
-      SYSTEM // MTGAMING // CONNECTED
+        <div class="system-badge">
+
+            <span>●</span>
+
+            SYSTEM // MTGAMING // CONNECTED
+
+        </div>
+
+
+        <h1>
+            MTgaming
+        </h1>
+
+
+        <p class="hero-sub">
+
+            MINECRAFT • GAMING • HIGHLIGHTS
+
+            <br>
+
+            Welcome to the grid. Watch, play and
+            join the MTgaming community.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a
+                class="btn primary"
+                href="https://www.youtube.com/@MTgamingYT-gamer"
+                target="_blank"
+                rel="noopener"
+            >
+
+                ▶ WATCH CHANNEL
+
+            </a>
+
+
+            <a
+                class="btn secondary"
+                href="#content"
+            >
+
+                EXPLORE THE GRID ↓
+
+            </a>
+
+        </div>
+
+
+        <div class="hero-mini">
+
+            <div class="mini">
+
+                <strong>MC</strong>
+
+                <span>MINECRAFT</span>
+
+            </div>
+
+
+            <div class="mini">
+
+                <strong>YT</strong>
+
+                <span>CREATOR</span>
+
+            </div>
+
+
+            <div class="mini">
+
+                <strong>24/7</strong>
+
+                <span>THE GRID</span>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <h1>MTgaming</h1>
 
-    <p class="tagline">
-      GAMING CONTENT, CLUTCH MOMENTS &amp; THE GRID YOU BELONG IN
+    <div class="scroll">
+
+        ↓ SCROLL TO ENTER ↓
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     MAIN
+======================================================= -->
+
+<main class="container">
+
+
+<!-- =======================================================
+     ABOUT
+======================================================= -->
+
+<section id="about" class="reveal">
+
+    <div class="section-heading">
+
+        <div class="kicker">
+            01 // ABOUT
+        </div>
+
+        <h2>
+            WELCOME TO MTGAMING
+        </h2>
+
+        <p>
+            A gaming hub built around Minecraft,
+            entertaining moments and the journey
+            of building the channel.
+        </p>
+
+    </div>
+
+
+    <div class="card about-card">
+
+        <div class="about-main">
+
+            <h3>
+                ENTER THE GRID.
+            </h3>
+
+            <p>
+
+                MTgaming is where gaming,
+                Minecraft and creativity come together.
+
+                From survival adventures to random
+                moments that somehow become the best
+                clips, this is the home of the channel.
+
+            </p>
+
+        </div>
+
+
+        <div class="terminal">
+
+            <div class="terminal-top">
+
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+
+                <span class="terminal-title">
+                    mtgaming_terminal.exe
+                </span>
+
+            </div>
+
+
+            <div class="terminal-body">
+
+                <div>
+                    <span class="pink">$</span>
+                    <span class="white">
+                        connect mtgaming
+                    </span>
+                </div>
+
+                <div>
+                    status:
+                    <span class="green">
+                        ONLINE
+                    </span>
+                </div>
+
+                <div>
+                    world:
+                    <span class="white">
+                        MINECRAFT
+                    </span>
+                </div>
+
+                <div>
+                    creator:
+                    <span class="white">
+                        MTgaming
+                    </span>
+                </div>
+
+                <div>
+                    mission:
+                    <span class="green">
+                        HAVE FUN
+                    </span>
+                </div>
+
+                <div>
+                    <span class="pink">
+                        _
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     STATS
+======================================================= -->
+
+<section class="reveal">
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                👥
+            </div>
+
+            <div
+                class="stat-number"
+                data-target="70"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                SUBSCRIBERS
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🎬
+            </div>
+
+            <div
+                class="stat-number"
+                data-target="100"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                GOAL
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ⛏️
+            </div>
+
+            <div class="stat-number">
+                MC
+            </div>
+
+            <div class="stat-label">
+                MAIN GAME
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ⚡
+            </div>
+
+            <div class="stat-number">
+                ON
+            </div>
+
+            <div class="stat-label">
+                THE GRIND
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     CONTENT
+======================================================= -->
+
+<section
+    id="content"
+    style="margin-top:85px"
+    class="reveal"
+>
+
+    <div class="section-heading">
+
+        <div class="kicker">
+            02 // CONTENT
+        </div>
+
+        <h2>
+            WHAT'S INSIDE THE GRID?
+        </h2>
+
+        <p>
+            The kind of gaming content you can
+            expect from MTgaming.
+        </p>
+
+    </div>
+
+
+    <div class="content-grid">
+
+
+        <article class="card content-card">
+
+            <div class="content-icon">
+                ⛏️
+            </div>
+
+            <h3>
+                MINECRAFT
+            </h3>
+
+            <p>
+                Survival, builds, challenges,
+                servers and whatever happens
+                along the way.
+            </p>
+
+            <span class="card-tag">
+                MAIN CONTENT
+            </span>
+
+        </article>
+
+
+        <article class="card content-card">
+
+            <div class="content-icon">
+                🎮
+            </div>
+
+            <h3>
+                GAMING
+            </h3>
+
+            <p>
+                Gaming sessions, challenges,
+                experiments and entertaining
+                moments.
+            </p>
+
+            <span class="card-tag">
+                GAMEPLAY
+            </span>
+
+        </article>
+
+
+        <article class="card content-card">
+
+            <div class="content-icon">
+                🔥
+            </div>
+
+            <h3>
+                HIGHLIGHTS
+            </h3>
+
+            <p>
+                The funniest, coolest and most
+                unexpected moments turned
+                into short-form content.
+            </p>
+
+            <span class="card-tag">
+                SHORTS
+            </span>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     FEATURED
+======================================================= -->
+
+<section
+    id="featured"
+    class="reveal"
+>
+
+    <div class="featured">
+
+        <div class="featured-main">
+
+            <div class="kicker">
+                03 // FEATURED
+            </div>
+
+            <h2>
+                THE NEXT LEVEL
+                STARTS HERE.
+            </h2>
+
+            <p>
+                New videos, Minecraft adventures
+                and more are waiting on the channel.
+                Jump over to YouTube and see what's
+                currently dropping.
+            </p>
+
+            <div style="margin-top:22px">
+
+                <a
+                    class="btn primary"
+                    href="https://www.youtube.com/@MTgamingYT-gamer"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    ▶ OPEN YOUTUBE
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="featured-side">
+
+
+            <div class="featured-small">
+
+                <strong>
+                    CURRENT MISSION
+                </strong>
+
+                <h3>
+                    ROAD TO 100
+                </h3>
+
+                <p>
+                    Help MTgaming reach the next
+                    milestone.
+                </p>
+
+            </div>
+
+
+            <div class="featured-small">
+
+                <strong>
+                    COMMUNITY
+                </strong>
+
+                <h3>
+                    JOIN THE DISCORD
+                </h3>
+
+                <p>
+                    Get connected with the
+                    MTgaming community.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     CONNECT
+======================================================= -->
+
+<section
+    id="connect"
+    style="margin-top:85px"
+    class="reveal"
+>
+
+    <div class="section-heading">
+
+        <div class="kicker">
+            04 // CONNECT
+        </div>
+
+        <h2>
+            FIND MTGAMING
+        </h2>
+
+        <p>
+            Pull up and connect with the community.
+        </p>
+
+    </div>
+
+
+    <div class="connect-grid">
+
+
+        <!-- DISCORD -->
+
+        <article class="card connect-card">
+
+            <div class="connect-icon">
+                💬
+            </div>
+
+            <h3>
+                DISCORD
+            </h3>
+
+            <p>
+                Join the community and
+                hang out.
+            </p>
+
+            <a
+                class="connect-link"
+                href="https://discord.gg/HaDAdpsTHb"
+                target="_blank"
+                rel="noopener"
+            >
+
+                JOIN DISCORD ↗
+
+            </a>
+
+        </article>
+
+
+        <!-- MINECRAFT -->
+
+        <article class="card connect-card">
+
+            <div class="connect-icon">
+                🧱
+            </div>
+
+            <h3>
+                MINECRAFT
+            </h3>
+
+            <p>
+                In-game username:
+                MTgamingYTSUB
+            </p>
+
+            <button
+                class="connect-link"
+                id="copyUsername"
+                style="
+                    width:100%;
+                    color:inherit;
+                    cursor:pointer;
+                "
+            >
+
+                COPY USERNAME ⧉
+
+            </button>
+
+        </article>
+
+
+        <!-- YOUTUBE -->
+
+        <article class="card connect-card">
+
+            <div class="connect-icon">
+                ▶️
+            </div>
+
+            <h3>
+                YOUTUBE
+            </h3>
+
+            <p>
+                Watch videos and
+                subscribe to the channel.
+            </p>
+
+            <a
+                class="connect-link"
+                href="https://www.youtube.com/@MTgamingYT-gamer"
+                target="_blank"
+                rel="noopener"
+            >
+
+                @MTgamingYT-gamer ↗
+
+            </a>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     FINAL CTA
+======================================================= -->
+
+<section
+    class="cta reveal"
+>
+
+    <div class="kicker">
+        05 // SYSTEM MESSAGE
+    </div>
+
+    <h2>
+        READY TO ENTER THE GRID?
+    </h2>
+
+    <p>
+        The next MTgaming video could be one click away.
     </p>
 
-    <div class="hero-buttons">
-
-      <a
+    <a
         class="btn primary"
         href="https://www.youtube.com/@MTgamingYT-gamer"
         target="_blank"
         rel="noopener"
-      >
-        ▶ WATCH CHANNEL
-      </a>
+    >
 
-      <a class="btn secondary" href="#content">
-        EXPLORE ↓
-      </a>
+        ▶ VISIT MTGAMING
 
-    </div>
-
-  </div>
-
-  <div class="scroll">
-    SCROLL TO EXPLORE
-  </div>
+    </a>
 
 </section>
 
-<!-- =========================
-     MAIN CONTENT
-========================= -->
-
-<main class="wrap">
-
-  <!-- ABOUT -->
-
-  <section id="about">
-
-    <div class="section-title">
-
-      <div class="kicker">
-        01 // ABOUT
-      </div>
-
-      <h2>
-        ABOUT THE CHANNEL
-      </h2>
-
-    </div>
-
-    <div class="card">
-
-      <p>
-        MTgaming is a gaming content hub built around Minecraft,
-        gaming challenges, survival adventures and the moments
-        worth clipping. Plug in and pick your game.
-      </p>
-
-    </div>
-
-  </section>
-
-  <!-- CONTENT -->
-
-  <section id="content" style="margin-top:70px">
-
-    <div class="section-title">
-
-      <div class="kicker">
-        02 // CONTENT
-      </div>
-
-      <h2>
-        WHAT YOU'LL FIND HERE
-      </h2>
-
-    </div>
-
-    <div class="grid">
-
-      <article class="card">
-
-        <div class="icon">
-          ⛏️
-        </div>
-
-        <h3>
-          MINECRAFT
-        </h3>
-
-        <p>
-          Survival series, builds, challenges and
-          unexpected moments from the Minecraft world.
-        </p>
-
-      </article>
-
-      <article class="card">
-
-        <div class="icon">
-          🎮
-        </div>
-
-        <h3>
-          GAMING
-        </h3>
-
-        <p>
-          Gaming sessions, challenges and entertaining
-          moments from the games I'm playing.
-        </p>
-
-      </article>
-
-      <article class="card">
-
-        <div class="icon">
-          🔥
-        </div>
-
-        <h3>
-          HIGHLIGHTS
-        </h3>
-
-        <p>
-          Standout plays, funny moments and short-form
-          clips pulled from the best moments on the channel.
-        </p>
-
-      </article>
-
-    </div>
-
-  </section>
-
-  <!-- CONNECT -->
-
-  <section id="connect" style="margin-top:70px">
-
-    <div class="section-title">
-
-      <div class="kicker">
-        03 // CONNECT
-      </div>
-
-      <h2>
-        FIND US EVERYWHERE
-      </h2>
-
-    </div>
-
-    <div class="grid">
-
-      <!-- DISCORD -->
-
-      <article class="card connect-card">
-
-        <div class="icon">
-          💬
-        </div>
-
-        <h3>
-          DISCORD
-        </h3>
-
-        <p>
-          Join the MTgaming community.
-        </p>
-
-        <a
-          class="handle"
-          href="https://discord.gg/HaDAdpsTHb"
-          target="_blank"
-          rel="noopener"
-          aria-label="Join the MTgaming Discord server"
-        >
-          JOIN THE DISCORD
-          <span aria-hidden="true">↗</span>
-        </a>
-
-      </article>
-
-      <!-- MINECRAFT -->
-
-      <article class="card connect-card">
-
-        <div class="icon">
-          🧱
-        </div>
-
-        <h3>
-          MINECRAFT
-        </h3>
-
-        <p>
-          Find me in-game under this username.
-        </p>
-
-        <div class="handle">
-
-          MTgamingYTSUB
-
-          <button
-            class="copybtn"
-            type="button"
-            data-copy="MTgamingYTSUB"
-            aria-label="Copy Minecraft username"
-          >
-            ⧉
-          </button>
-
-        </div>
-
-      </article>
-
-      <!-- YOUTUBE -->
-
-      <article class="card connect-card">
-
-        <div class="icon">
-          ▶️
-        </div>
-
-        <h3>
-          YOUTUBE
-        </h3>
-
-        <p>
-          Subscribe for new uploads.
-        </p>
-
-        <a
-          class="handle"
-          href="https://www.youtube.com/@MTgamingYT-gamer"
-          target="_blank"
-          rel="noopener"
-        >
-          @MTgamingYT-gamer
-          <span aria-hidden="true">↗</span>
-        </a>
-
-      </article>
-
-    </div>
-
-  </section>
-
-  <!-- CHANNEL CTA -->
-
-  <section class="cta" id="channel">
-
-    <div class="kicker">
-      04 // CHANNEL LINK
-    </div>
-
-    <h2>
-      READY TO ENTER THE GRID?
-    </h2>
-
-    <p style="color:var(--muted)">
-      Check out the latest MTgaming videos and join the journey.
-    </p>
-
-    <a
-      class="btn primary"
-      href="https://www.youtube.com/@MTgamingYT-gamer"
-      target="_blank"
-      rel="noopener"
-    >
-      ▶ VISIT YOUTUBE
-    </a>
-
-  </section>
 
 </main>
 
-<!-- FOOTER -->
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
 
 <footer>
-  MTgaming © 2026. All rights reserved.
+
+    MTgaming © 2026
+
+    <br>
+
+    <span>
+        SYSTEM ONLINE // KEEP GAMING
+    </span>
+
 </footer>
 
-<!-- =========================
+
+<!-- =======================================================
      JAVASCRIPT
-========================= -->
+======================================================= -->
 
 <script>
 
-/* =========================
+/* =========================================================
    PARTICLES
-========================= */
+========================================================= */
 
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
+const canvas =
+    document.getElementById("particles");
+
+const ctx =
+    canvas.getContext("2d");
 
 let particles = [];
 
-function resize(){
+function resizeCanvas(){
 
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
+    canvas.width =
+        window.innerWidth;
 
-}
-
-function make(){
-
-  particles = Array.from(
-    {
-      length:Math.min(
-        100,
-        Math.floor(innerWidth / 11)
-      )
-    },
-    () => ({
-
-      x:Math.random() * canvas.width,
-      y:Math.random() * canvas.height,
-
-      r:Math.random() * 1.5 + .3,
-
-      vx:(Math.random() - .5) * .25,
-      vy:(Math.random() - .5) * .25,
-
-      a:Math.random() * .6 + .12
-
-    })
-  );
+    canvas.height =
+        window.innerHeight;
 
 }
 
-function draw(){
+function createParticles(){
 
-  ctx.clearRect(
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
-
-  for(const p of particles){
-
-    p.x += p.vx;
-    p.y += p.vy;
-
-    if(p.x < 0)
-      p.x = canvas.width;
-
-    if(p.x > canvas.width)
-      p.x = 0;
-
-    if(p.y < 0)
-      p.y = canvas.height;
-
-    if(p.y > canvas.height)
-      p.y = 0;
-
-    ctx.beginPath();
-
-    ctx.arc(
-      p.x,
-      p.y,
-      p.r,
-      0,
-      Math.PI * 2
-    );
-
-    ctx.fillStyle =
-      `rgba(0,229,255,${p.a})`;
-
-    ctx.fill();
-
-  }
-
-  requestAnimationFrame(draw);
-
-}
-
-addEventListener(
-  "resize",
-  () => {
-
-    resize();
-    make();
-
-  }
-);
-
-resize();
-make();
-draw();
-
-
-/* =========================
-   MOBILE MENU
-========================= */
-
-const navburger =
-  document.getElementById("navburger");
-
-const navdrop =
-  document.getElementById("navdrop");
-
-navburger.addEventListener(
-  "click",
-  () => {
-
-    const open =
-      navdrop.classList.toggle("open");
-
-    navburger.classList.toggle(
-      "open",
-      open
-    );
-
-    navburger.setAttribute(
-      "aria-expanded",
-      open
-    );
-
-  }
-);
-
-navdrop
-  .querySelectorAll("a")
-  .forEach(a => {
-
-    a.addEventListener(
-      "click",
-      () => {
-
-        navdrop.classList.remove("open");
-
-        navburger.classList.remove("open");
-
-        navburger.setAttribute(
-          "aria-expanded",
-          "false"
+    const amount =
+        Math.min(
+            85,
+            Math.floor(
+                window.innerWidth / 13
+            )
         );
 
-      }
+    particles =
+        Array.from(
+            {length:amount},
+            () => ({
+
+                x:
+                    Math.random() *
+                    canvas.width,
+
+                y:
+                    Math.random() *
+                    canvas.height,
+
+                r:
+                    Math.random() * 1.4 + .25,
+
+                vx:
+                    (Math.random()-.5) * .22,
+
+                vy:
+                    (Math.random()-.5) * .22,
+
+                alpha:
+                    Math.random() * .5 + .1
+
+            })
+        );
+
+}
+
+function animateParticles(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
     );
 
-  });
+    for(
+        const p of particles
+    ){
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if(p.x < 0)
+            p.x = canvas.width;
+
+        if(p.x > canvas.width)
+            p.x = 0;
+
+        if(p.y < 0)
+            p.y = canvas.height;
+
+        if(p.y > canvas.height)
+            p.y = 0;
 
 
-/* =========================
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            p.r,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+            `rgba(0,229,255,${p.alpha})`;
+
+        ctx.fill();
+
+    }
+
+    requestAnimationFrame(
+        animateParticles
+    );
+
+}
+
+resizeCanvas();
+
+createParticles();
+
+animateParticles();
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        resizeCanvas();
+        createParticles();
+
+    }
+);
+
+
+/* =========================================================
+   CURSOR GLOW
+========================================================= */
+
+const glow =
+    document.getElementById(
+        "cursorGlow"
+    );
+
+window.addEventListener(
+    "mousemove",
+    event => {
+
+        glow.style.left =
+            event.clientX + "px";
+
+        glow.style.top =
+            event.clientY + "px";
+
+    }
+);
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+const burger =
+    document.getElementById(
+        "navburger"
+    );
+
+const drop =
+    document.getElementById(
+        "navdrop"
+    );
+
+burger.addEventListener(
+    "click",
+    () => {
+
+        const open =
+            drop.classList.toggle(
+                "open"
+            );
+
+        burger.classList.toggle(
+            "open",
+            open
+        );
+
+        burger.setAttribute(
+            "aria-expanded",
+            open
+        );
+
+    }
+);
+
+
+drop.querySelectorAll("a")
+    .forEach(link => {
+
+        link.addEventListener(
+            "click",
+            () => {
+
+                drop.classList.remove(
+                    "open"
+                );
+
+                burger.classList.remove(
+                    "open"
+                );
+
+                burger.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+        );
+
+    });
+
+
+/* =========================================================
    COPY MINECRAFT USERNAME
-========================= */
+========================================================= */
 
-document
-  .querySelectorAll(".copybtn")
-  .forEach(btn => {
+const copyButton =
+    document.getElementById(
+        "copyUsername"
+    );
 
-    btn.addEventListener(
-      "click",
-      async () => {
-
-        const val =
-          btn.getAttribute("data-copy");
+copyButton.addEventListener(
+    "click",
+    async () => {
 
         try{
 
-          await navigator.clipboard.writeText(val);
+            await navigator.clipboard.writeText(
+                "MTgamingYTSUB"
+            );
 
-          const original =
-            btn.textContent;
+            const old =
+                copyButton.textContent;
 
-          btn.textContent = "✓";
+            copyButton.textContent =
+                "✓ COPIED!";
 
-          setTimeout(
-            () => {
-              btn.textContent = original;
-            },
-            1400
-          );
+            setTimeout(
+                () => {
 
-        }catch(e){}
+                    copyButton.textContent =
+                        old;
 
-      }
+                },
+                1500
+            );
+
+        }catch(error){
+
+            copyButton.textContent =
+                "MTgamingYTSUB";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const revealItems =
+    document.querySelectorAll(
+        ".reveal"
     );
 
-  });
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if(
+                        entry.isIntersecting
+                    ){
+
+                        entry.target
+                            .classList
+                            .add("show");
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold:.12
+        }
+    );
+
+revealItems.forEach(
+    item => observer.observe(item)
+);
+
+
+/* =========================================================
+   STAT COUNTERS
+========================================================= */
+
+const counters =
+    document.querySelectorAll(
+        ".stat-number[data-target]"
+    );
+
+const counterObserver =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if(
+                        !entry.isIntersecting
+                    )
+                        return;
+
+                    const counter =
+                        entry.target;
+
+                    const target =
+                        Number(
+                            counter.dataset.target
+                        );
+
+                    let current = 0;
+
+                    const duration = 1000;
+
+                    const start =
+                        performance.now();
+
+                    function update(time){
+
+                        const progress =
+                            Math.min(
+                                (time-start) /
+                                duration,
+                                1
+                            );
+
+                        current =
+                            Math.floor(
+                                progress *
+                                target
+                            );
+
+                        counter.textContent =
+                            current;
+
+                        if(progress < 1){
+
+                            requestAnimationFrame(
+                                update
+                            );
+
+                        }else{
+
+                            counter.textContent =
+                                target;
+
+                        }
+
+                    }
+
+                    requestAnimationFrame(
+                        update
+                    );
+
+                    counterObserver.unobserve(
+                        counter
+                    );
+
+                }
+            );
+
+        },
+        {
+            threshold:.7
+        }
+    );
+
+counters.forEach(
+    counter =>
+        counterObserver.observe(counter)
+);
+
+
+/* =========================================================
+   ACTIVE NAV EFFECT
+========================================================= */
+
+const sections =
+    document.querySelectorAll(
+        "section[id]"
+    );
+
+const navItems =
+    document.querySelectorAll(
+        ".navlinks a"
+    );
+
+const sectionObserver =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if(
+                        entry.isIntersecting
+                    ){
+
+                        navItems.forEach(
+                            link => {
+
+                                link.style.color =
+                                    "";
+
+                            }
+                        );
+
+                        const active =
+                            document.querySelector(
+                                `.navlinks a[href="#${entry.target.id}"]`
+                            );
+
+                        if(active){
+
+                            active.style.color =
+                                "var(--cyan)";
+
+                        }
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            rootMargin:
+                "-35% 0px -55% 0px"
+        }
+    );
+
+sections.forEach(
+    section =>
+        sectionObserver.observe(section)
+);
 
 </script>
 
